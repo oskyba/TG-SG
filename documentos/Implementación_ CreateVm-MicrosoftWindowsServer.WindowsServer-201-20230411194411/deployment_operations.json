@@ -1,0 +1,116 @@
+[
+  {
+    "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Resources/deployments/CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411/operations/F624A53D2A57F07B",
+    "operationId": "F624A53D2A57F07B",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2023-04-11T22:52:43.0595099Z",
+      "duration": "PT3M17.1925595S",
+      "trackingId": "8982d325-2210-481d-9fd5-22ee7fc9de4b",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Compute/virtualMachines/SGBackendTest/extensions/GuestAttestation",
+        "resourceType": "Microsoft.Compute/virtualMachines/extensions",
+        "resourceName": "SGBackendTest/GuestAttestation"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Resources/deployments/CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411/operations/3D202D38F84A103E",
+    "operationId": "3D202D38F84A103E",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2023-04-11T22:50:54.7910945Z",
+      "duration": "PT1M28.9241441S",
+      "trackingId": "009edbc8-0cf1-488d-8060-a2b07480f9ce",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Compute/virtualMachines/SGBackendTest",
+        "resourceType": "Microsoft.Compute/virtualMachines",
+        "resourceName": "SGBackendTest"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Resources/deployments/CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411/operations/E52DFAF9A52AD67A",
+    "operationId": "E52DFAF9A52AD67A",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2023-04-11T22:49:25.4221929Z",
+      "duration": "PT14.1849087S",
+      "trackingId": "29cef672-9f24-4f99-9660-a290fbd0052b",
+      "statusCode": "Created",
+      "targetResource": {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/networkInterfaces/sgbackendtest449",
+        "resourceType": "Microsoft.Network/networkInterfaces",
+        "resourceName": "sgbackendtest449"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Resources/deployments/CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411/operations/7009CD2D608FA971",
+    "operationId": "7009CD2D608FA971",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2023-04-11T22:49:10.7743434Z",
+      "duration": "PT15.7093569S",
+      "trackingId": "cf16fbbc-3571-4135-b0d0-8e9e65862b1e",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/publicIpAddresses/SGBackendTest-ip",
+        "resourceType": "Microsoft.Network/publicIpAddresses",
+        "resourceName": "SGBackendTest-ip"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Resources/deployments/CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411/operations/29E95DE424728CE3",
+    "operationId": "29E95DE424728CE3",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2023-04-11T22:49:01.8173881Z",
+      "duration": "PT6.7524016S",
+      "trackingId": "bcafcb9e-9e19-4bcc-8f60-3287a05acf46",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/virtualNetworks/SGBackendTest-vnet",
+        "resourceType": "Microsoft.Network/virtualNetworks",
+        "resourceName": "SGBackendTest-vnet"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Resources/deployments/CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411/operations/1988E24D15B69123",
+    "operationId": "1988E24D15B69123",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2023-04-11T22:49:01.1270467Z",
+      "duration": "PT17.6151737S",
+      "trackingId": "822f9301-f6dd-4eeb-91b5-1e6158b954f3",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/networkSecurityGroups/SGBackendTest-nsg",
+        "resourceType": "Microsoft.Network/networkSecurityGroups",
+        "resourceName": "SGBackendTest-nsg"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Resources/deployments/CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411/operations/08585203535645455256",
+    "operationId": "08585203535645455256",
+    "properties": {
+      "provisioningOperation": "EvaluateDeploymentOutput",
+      "provisioningState": "Succeeded",
+      "timestamp": "2023-04-11T22:52:44.0525809Z",
+      "duration": "PT3M18.1856305S",
+      "trackingId": "b0c5f21d-6b82-49b2-8f1a-7238f0afd307",
+      "statusCode": "OK"
+    }
+  }
+]

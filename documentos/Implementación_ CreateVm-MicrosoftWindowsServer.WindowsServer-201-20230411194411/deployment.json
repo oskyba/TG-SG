@@ -1,0 +1,272 @@
+{
+  "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Resources/deployments/CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411",
+  "name": "CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411",
+  "type": "Microsoft.Resources/deployments",
+  "tags": {
+    "primaryResourceId": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourcegroups/TG_SG/providers/Microsoft.Compute/virtualMachines/SGBackendTest",
+    "marketplaceItemId": "Microsoft.WindowsServer2016Datacenter-ARM",
+    "provisioningHash": "SolutionProvider"
+  },
+  "properties": {
+    "templateHash": "383575468041071189",
+    "parameters": {
+      "location": {
+        "type": "String",
+        "value": "brazilsouth"
+      },
+      "networkInterfaceName": {
+        "type": "String",
+        "value": "sgbackendtest449"
+      },
+      "networkSecurityGroupName": {
+        "type": "String",
+        "value": "SGBackendTest-nsg"
+      },
+      "networkSecurityGroupRules": {
+        "type": "Array",
+        "value": [
+          {
+            "name": "RDP",
+            "properties": {
+              "priority": 300,
+              "protocol": "TCP",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "3389"
+            }
+          }
+        ]
+      },
+      "subnetName": {
+        "type": "String",
+        "value": "default"
+      },
+      "virtualNetworkName": {
+        "type": "String",
+        "value": "SGBackendTest-vnet"
+      },
+      "addressPrefixes": {
+        "type": "Array",
+        "value": [
+          "10.0.0.0/16"
+        ]
+      },
+      "subnets": {
+        "type": "Array",
+        "value": [
+          {
+            "name": "default",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          }
+        ]
+      },
+      "publicIpAddressName": {
+        "type": "String",
+        "value": "SGBackendTest-ip"
+      },
+      "publicIpAddressType": {
+        "type": "String",
+        "value": "Static"
+      },
+      "publicIpAddressSku": {
+        "type": "String",
+        "value": "Standard"
+      },
+      "pipDeleteOption": {
+        "type": "String",
+        "value": "Detach"
+      },
+      "virtualMachineName": {
+        "type": "String",
+        "value": "SGBackendTest"
+      },
+      "virtualMachineComputerName": {
+        "type": "String",
+        "value": "SGBackendTest"
+      },
+      "virtualMachineRG": {
+        "type": "String",
+        "value": "TG_SG"
+      },
+      "osDiskType": {
+        "type": "String",
+        "value": "StandardSSD_LRS"
+      },
+      "osDiskDeleteOption": {
+        "type": "String",
+        "value": "Delete"
+      },
+      "virtualMachineSize": {
+        "type": "String",
+        "value": "Standard_B1s"
+      },
+      "nicDeleteOption": {
+        "type": "String",
+        "value": "Detach"
+      },
+      "adminUsername": {
+        "type": "String",
+        "value": "oskyba"
+      },
+      "adminPassword": {
+        "type": "SecureString"
+      },
+      "patchMode": {
+        "type": "String",
+        "value": "AutomaticByOS"
+      },
+      "enableHotpatching": {
+        "type": "Bool",
+        "value": false
+      },
+      "securityType": {
+        "type": "String",
+        "value": "TrustedLaunch"
+      },
+      "secureBoot": {
+        "type": "Bool",
+        "value": true
+      },
+      "vTPM": {
+        "type": "Bool",
+        "value": true
+      }
+    },
+    "mode": "Incremental",
+    "debugSetting": {
+      "detailLevel": "None"
+    },
+    "provisioningState": "Succeeded",
+    "timestamp": "2023-04-11T22:52:44.4647754Z",
+    "duration": "PT4M3.452229S",
+    "correlationId": "59fe06ec-6174-41b9-aaf9-11c826c22706",
+    "providers": [
+      {
+        "namespace": "Microsoft.Network",
+        "resourceTypes": [
+          {
+            "resourceType": "networkInterfaces",
+            "locations": [
+              "brazilsouth"
+            ]
+          },
+          {
+            "resourceType": "networkSecurityGroups",
+            "locations": [
+              "brazilsouth"
+            ]
+          },
+          {
+            "resourceType": "virtualNetworks",
+            "locations": [
+              "brazilsouth"
+            ]
+          },
+          {
+            "resourceType": "publicIpAddresses",
+            "locations": [
+              "brazilsouth"
+            ]
+          }
+        ]
+      },
+      {
+        "namespace": "Microsoft.Compute",
+        "resourceTypes": [
+          {
+            "resourceType": "virtualMachines",
+            "locations": [
+              "brazilsouth"
+            ]
+          },
+          {
+            "resourceType": "virtualMachines/extensions",
+            "locations": [
+              "brazilsouth"
+            ]
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/networkSecurityGroups/SGBackendTest-nsg",
+            "resourceType": "Microsoft.Network/networkSecurityGroups",
+            "resourceName": "SGBackendTest-nsg"
+          },
+          {
+            "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/virtualNetworks/SGBackendTest-vnet",
+            "resourceType": "Microsoft.Network/virtualNetworks",
+            "resourceName": "SGBackendTest-vnet"
+          },
+          {
+            "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/publicIpAddresses/SGBackendTest-ip",
+            "resourceType": "Microsoft.Network/publicIpAddresses",
+            "resourceName": "SGBackendTest-ip"
+          }
+        ],
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/networkInterfaces/sgbackendtest449",
+        "resourceType": "Microsoft.Network/networkInterfaces",
+        "resourceName": "sgbackendtest449"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/networkInterfaces/sgbackendtest449",
+            "resourceType": "Microsoft.Network/networkInterfaces",
+            "resourceName": "sgbackendtest449"
+          }
+        ],
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Compute/virtualMachines/SGBackendTest",
+        "resourceType": "Microsoft.Compute/virtualMachines",
+        "resourceName": "SGBackendTest"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Compute/virtualMachines/SGBackendTest",
+            "resourceType": "Microsoft.Compute/virtualMachines",
+            "resourceName": "SGBackendTest"
+          }
+        ],
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Compute/virtualMachines/SGBackendTest/extensions/GuestAttestation",
+        "resourceType": "Microsoft.Compute/virtualMachines/extensions",
+        "resourceName": "SGBackendTest/GuestAttestation"
+      }
+    ],
+    "outputs": {
+      "adminUsername": {
+        "type": "String",
+        "value": "oskyba"
+      }
+    },
+    "outputResources": [
+      {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Compute/virtualMachines/SGBackendTest"
+      },
+      {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Compute/virtualMachines/SGBackendTest/extensions/GuestAttestation"
+      },
+      {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/networkInterfaces/sgbackendtest449"
+      },
+      {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/networkSecurityGroups/SGBackendTest-nsg"
+      },
+      {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/publicIpAddresses/SGBackendTest-ip"
+      },
+      {
+        "id": "/subscriptions/f48ec4f7-d111-4444-8ed2-057f8b6bac40/resourceGroups/TG_SG/providers/Microsoft.Network/virtualNetworks/SGBackendTest-vnet"
+      }
+    ],
+    "validationLevel": "Template"
+  }
+}
