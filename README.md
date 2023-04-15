@@ -1,9 +1,9 @@
 # TG-SG
-
-<h1 align="center"> Proyecto Sistema de Gestión </h1>
 <p align="left">
    <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
 </p>
+<h1 align="center"> Proyecto Sistema de Gestión </h1>
+
 FrontEnd y BackEnd desarrollado por TecnoGlobal.
 
 Herramientas:
