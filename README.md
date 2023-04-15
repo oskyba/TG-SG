@@ -1,5 +1,6 @@
 # TG-SG
-Proyecto Sistema de Gestión
+<h1 align="center"> Proyecto Sistema de Gestión </h1>
+
 FrontEnd y BackEnd desarrollado por TecnoGlobal.
 
 Herramientas:
