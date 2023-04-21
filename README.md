@@ -13,5 +13,7 @@ Newtonsoft JSON para la serializacion de mensajes,
 Documentacion APIs con Swagger y Docker-ready.
 
 URL acceso backend: 
-http://sgbackend.brazilsouth.cloudapp.azure.com/
+<p>
+http://sg-tecnoglobal.brazilsouth.cloudapp.azure.com/
 http://20.226.114.247/
+</p>
