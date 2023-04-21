@@ -12,8 +12,9 @@ Framework Dapper para SQL Server.
 Newtonsoft JSON para la serializacion de mensajes,
 Documentacion APIs con Swagger y Docker-ready.
 
-URL acceso backend: 
+URL acceso : 
 <p>
-http://sg-tecnoglobal.brazilsouth.cloudapp.azure.com/
-http://20.226.114.247/
+http://sg-tecnoglobal.brazilsouth.cloudapp.azure.com/<br>
+Acceso al API Backend  <br> 
+http://20.226.114.247:8080/<br>
 </p>
