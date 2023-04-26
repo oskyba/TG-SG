@@ -1,0 +1,306 @@
+/* Estilo de la página principal */
+body {
+    background-color: #f0f8ff; /* Azul pastel */
+    font-family: Arial, sans-serif;
+    color: #333; /* Texto oscuro */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Segoe UI", sans-serif;
+    color: #008080; /* Verde pastel */
+  }
+  
+  /* Estilo de los botones */
+  button {
+    background-color: #008080; /* Verde pastel */
+    color: #fff; /* Texto blanco */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #006666; /* Verde oscuro */
+  }
+  
+  /* Estilo de las tablas */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #008080; /* Verde pastel */
+    color: #fff; /* Texto blanco */
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Estilo de los modales */
+  .modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Estilo de los inputs */
+  input[type="text"], input[type="number"], input[type="date"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+  }
+  
+  input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
+    border: 2px solid #008080; /* Verde pastel */
+    outline: none;
+  }
+  
+  /* Estilo de los botones de acción en las tablas */
+  .action-button {
+    background-color: #008080; /* Verde pastel */
+    color: #fff; /* Texto blanco */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 5px;
+  }
+  
+  .action-button:hover {
+    background-color: #006666; /* Verde oscuro */
+  }
+  
+  .checkbox-cobrado {
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox-cobrado label {
+    margin-left: 8px;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .checkbox-cobrado input[type="checkbox"] {
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    background-color: #d1d1d1;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .checkbox-cobrado input[type="checkbox"]:checked {
+    background-color: #66bb6a;
+  }
+   
+/* Tabla */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    font-size: 0.9rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  table thead th {
+    font-weight: bold;
+    background-color: #00b3b3;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 3px solid #ddd;
+  }
+  
+  table th,
+  table td {
+    padding: 0.75rem;
+    text-align: center;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Input */
+  input,
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+  }
+  
+  /* Botones */
+  .btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #00b3b3;
+    border: 1px solid #00b3b3;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .btn:hover {
+    color: #fff;
+    background-color: #007a7a;
+    border-color: #007a7a;
+  }
+  
+  .btn:focus,
+  .btn.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 179, 179, 0.5);
+  }
+  
+  .btn-secondary {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #00b3b3;
+    border: 1px solid #00b3b3;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    line-height: 1;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .btn-secondary:hover {
+    color: #fff;
+    background-color: #007a7a;
+    border-color: #007a7a;
+  }
+  
+  .btn-secondary:focus,
+  .btn-secondary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 179, 179, 0.5);
+  }
+  /* Modales */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Filtros */
+  .filter {
+    margin-bottom: 1rem;
+  }
+  
+  .filter input {
+    display: inline-block;
+    width: auto;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Colores personalizados */
+  .bg-blue {
+    background-color: #00b3b3;
+  }
+  
+  .bg-green {
+    background-color: #9ac931;
+  }
+  
+  .color-blue {
+    color: #00b3b3;
+  }
+  
+  .color-green {
+    color: #9ac931;
+  }
+    

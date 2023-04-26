@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Facturas</title>
+	<!-- Incluir los archivos CSS y JavaScript necesarios -->
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="menu">
+        <button onclick="window.location.href='clientes.html'">Clientes</button>
+        <button onclick="window.location.href='facturas.html'">Facturas</button>
+        <button onclick="window.location.href='cobradores.html'">Cobradores</button>
+        <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
+      </div>
+	<h1>Facturas</h1>
+    <input type="text" id="buscar-facturas" placeholder="Buscar...">
+	
+	<table id="tablaFacturas">
+		<thead>
+			<tr>
+				<th>ID Factura</th>
+				<th>ID Cliente</th>
+				<th>Fecha</th>
+				<th>Número Factura</th>
+				<th>Importe</th>
+				<th>Estado</th>
+				<th>Fecha para cobrar</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Aquí se cargarán las filas de la tabla mediante JavaScript -->
+		</tbody>
+	</table>
+    <button id="btnAgregar">Agregar Factura</button>
+	<!-- Modal para agregar o editar una factura -->
+	<div id="modalFactura" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<!-- Aquí se incluyen los campos de la factura -->
+			<!-- El formulario se puede reutilizar para agregar y editar -->
+			<form id="formFactura">
+				<label for="idFactura">ID Factura:</label>
+					<input type="text" id="idFactura" name="idFactura" required>
+				<label for="idCliente">ID Cliente:</label>
+					<input type="text" id="idCliente" name="idCliente" required>
+				<label for="fecha">Fecha:</label>
+					<input type="date" id="fecha" name="fecha" required>
+				<label for="numeroFactura">Número Factura:</label>
+					<input type="text" id="numeroFactura" name="numeroFactura" required>
+				<label for="importe">Importe:</label>
+					<input type="text" id="importe" name="importe" required>
+				<label for="estado">Estado:</label>
+					<input type="text" id="estado" name="estado" required>
+				<label for="fechaCobro">Fecha para Cobrar:</label>
+					<input type="date" id="fechaCobro" name="fechaCobro" required>
+				<button type="submit" id="btnGuardar">Guardar</button>
+			</form>
+		</div>
+	</div>
+
+    <script>
+       $(document).ready(function() {
+	// Cargar la tabla de facturas
+	cargarTablaFacturas();
+
+	// Agregar un evento al botón de agregar factura
+	$("#btnAgregar").click(function() {
+		// Limpiar los campos del formulario
+		$("#formFactura")[0].reset();
+		// Cambiar el título del modal
+		$("#modalFactura h2").text("Agregar Factura");
+		// Mostrar el modal
+		$("#modalFactura").show();
+	});
+
+	// Agregar un evento al botón de guardar del formulario
+	$("#btnGuardar").click(function() {
+		// Obtener los valores de los campos del formulario
+		var idFactura = $("#idFactura").val();
+		var idCliente = $("#idCliente").val();
+		var fecha = $("#fecha").val();
+		var numeroFactura = $("#numeroFactura").val();
+		var importe = $("#importe").val();
+		var estado = $("#estado").val();
+		var fechaCobro = $("#fechaCobro").val();
+
+		// Validar los valores
+		if (idFactura === "" || idCliente === "" || fecha === "" || numeroFactura === "" || importe === "" || estado === "" || fechaCobro === "") {
+			alert("Por favor, complete todos los campos.");
+			return false;
+		}
+
+		// Crear un objeto con los valores de la factura
+		var factura = {
+			idFactura: idFactura,
+			idCliente: idCliente,
+			fecha: fecha,
+			numeroFactura: numeroFactura,
+			importe: importe,
+			estado: estado,
+			fechaCobro: fechaCobro
+		};
+
+		// Agregar la factura a la tabla
+		agregarFactura(factura);
+
+		// Ocultar el modal
+		$("#modalFactura").hide();
+
+		// Limpiar los campos del formulario
+		$("#formFactura")[0].reset();
+	});
+
+	// Agregar un evento a los botones de modificar factura
+	$("#tablaFacturas").on("click", ".btnModificar", function() {
+		// Obtener los valores de la fila seleccionada
+		var fila = $(this).closest("tr");
+		var idFactura = fila.find("td:eq(0)").text();
+		var idCliente = fila.find("td:eq(1)").text();
+		var fecha = fila.find("td:eq(2)").text();
+		var numeroFactura = fila.find("td:eq(3)").text();
+		var importe = fila.find("td:eq(4)").text();
+		var estado = fila.find("td:eq(5)").text();
+		var fechaCobro = fila.find("td:eq(6)").text();
+
+		// Asignar los valores al formulario
+		$("#idFactura").val(idFactura);
+		$("#idCliente").val(idCliente);
+		$("#fecha").val(fecha);
+		$("#numeroFactura").val(numeroFactura);
+        $("#importe").val(importe);
+        $("#estado").val(estado);
+        $("#fechaCobro").val(fechaCobro);
+    
+        // Cambiar el título del modal
+        $("#modalFactura h2").text("Modificar Factura");
+    
+        // Mostrar el modal
+        $("#modalFactura").show();
+    });
+    
+    // Agregar un evento a los botones de eliminar factura
+    $("#tablaFacturas").on("click", ".btnEliminar", function() {
+        // Obtener la fila seleccionada
+        var fila = $(this).closest("tr");
+    
+        // Mostrar un mensaje de confirmación
+        if (confirm("¿Está seguro que desea eliminar la factura seleccionada?")) {
+            // Eliminar la fila
+            fila.remove();
+        }
+    });
+    
+    // Función para cargar la tabla de facturas
+    function cargarTablaFacturas() {
+        // Agregar las filas a la tabla
+        var filas = "";
+        for (var i = 0; i < facturas.length; i++) {
+            filas += "<tr>";
+            filas += "<td>" + facturas[i].idFactura + "</td>";
+            filas += "<td>" + facturas[i].idCliente + "</td>";
+            filas += "<td>" + facturas[i].fecha + "</td>";
+            filas += "<td>" + facturas[i].numeroFactura + "</td>";
+            filas += "<td>" + facturas[i].importe + "</td>";
+            filas += "<td>" + facturas[i].estado + "</td>";
+            filas += "<td>" + facturas[i].fechaCobro + "</td>";
+            filas += "<td>";
+            filas += "<button class='btnModificar'>Modificar</button>";
+            filas += "<button class='btnEliminar'>Eliminar</button>";
+            filas += "</td>";
+            filas += "</tr>";
+        }
+        $("#tablaFacturas tbody").html(filas);
+    }
+    
+    // Función para agregar una factura a la tabla
+    function agregarFactura(factura) {
+        // Agregar la factura al arreglo
+        facturas.push(factura);
+    
+        // Agregar la fila a la tabla
+        var fila = "<tr>";
+        fila += "<td>" + factura.idFactura + "</td>";
+        fila += "<td>" + factura.idCliente + "</td>";
+        fila += "<td>" + factura.fecha + "</td>";
+        fila += "<td>" + factura.numeroFactura + "</td>";
+        fila += "<td>" + factura.importe + "</td>";
+        fila += "<td>" + factura.estado + "</td>";
+        fila += "<td>" + factura.fechaCobro + "</td>";
+        fila += "<td>";
+        fila += "<button class='btnModificar'>Modificar</button>";
+        fila += "<button class='btnEliminar'>Eliminar</button>";
+        fila += "</td>";
+        fila += "</tr>";
+        $("#tablaFacturas tbody").append(fila);
+    }
+}); 
+    </script>
+</body>
+</html>
