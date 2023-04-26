@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>Cobradores</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <div class="menu">
+        <button onclick="window.location.href='clientes.html'">Clientes</button>
+        <button onclick="window.location.href='facturas.html'">Facturas</button>
+        <button onclick="window.location.href='cobradores.html'">Cobradores</button>
+        <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
+      </div>
+    <h1>Cobradores</h1>
+    <input type="text" id="buscar-cobradores" placeholder="Buscar...">
+    <table id="cobradores-table">
+      <thead>
+        <tr>
+          <th>ID Factura</th>
+          <th>ID Cliente</th>
+          <th>Dirección</th>
+          <th>Fecha</th>
+          <th>Número Factura</th>
+          <th>Importe</th>
+          <th>Estado</th>
+          <th>Comentarios</th>
+          <th>Acciones</th>
+          <th>Cobrado</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <script>
+      fetch('https://ejemplo.com/api/cobradores')
+        .then(response => response.json())
+        .then(data => {
+          const tableBody = document.querySelector('#cobradores-table tbody');
+
+          data.forEach(cobrador => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${cobrador.id_factura}</td>
+              <td>${cobrador.id_cliente}</td>
+              <td>${cobrador.direccion}</td>
+              <td>${cobrador.fecha}</td>
+              <td>${cobrador.numero_factura}</td>
+              <td>${cobrador.importe}</td>
+              <td>${cobrador.estado}</td>
+              <td>${cobrador.comentarios}</td>
+              <td>Lista de Acciones</td>
+              <td><input type="checkbox" ${cobrador.cobrado ? 'checked' : ''}></td>
+            `;
+            tableBody.appendChild(row);
+          });
+        })
+        .catch(error => console.error(error));
+    </script>
+  </body>
+</html>
+
+
+
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Contactabilidad</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+	<script>
+		$(function() {
+			// Inicializar el datepicker
+			$("#datepicker").datepicker();
+			
+			// Asignar la función de cambio de estado al cambiar la fecha
+			$("#datepicker").on("change", function() {
+				$("#estado").val("Contactado");
+			});
+		});
+	</script>
+</head>
+<body>
+	<header>
+        <div class="menu">
+            <button onclick="window.location.href='clientes.html'">Clientes</button>
+            <button onclick="window.location.href='facturas.html'">Facturas</button>
+            <button onclick="window.location.href='cobradores.html'">Cobradores</button>
+            <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
+          </div>
+	</header>
+		<h1>Contactabilidad</h1>
+	<main>
+		<input type="text" id="buscar" placeholder="Buscar...">
+		<table>
+			<thead>
+				<tr>
+					<th>ID Factura</th>
+					<th>ID Cliente</th>
+					<th>Fecha</th>
+					<th>Número Factura</th>
+					<th>Importe</th>
+					<th>Teléfono</th>
+					<th>Fecha para Cobrar</th>
+					<th>Estado</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Aquí se cargarán los datos de la tabla mediante una API -->
+			</tbody>
+		</table>
+	</main>
+</body>
+</html>
