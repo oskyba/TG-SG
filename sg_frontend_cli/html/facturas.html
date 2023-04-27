@@ -14,9 +14,9 @@
         <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
       </div>
 	<h1>Facturas</h1>
-    <input type="text" id="buscar-facturas" placeholder="Buscar...">
+    <input type="text" id="search-facturas" placeholder="Buscar..." onkeyup="doSearch()" />
 	
-	<table id="tablaFacturas">
+	<table id="facturas-table">
 		<thead>
 			<tr>
 				<th>ID Factura</th>

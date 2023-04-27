@@ -2,6 +2,7 @@
   <head>
     <title>Cobradores</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="cobradores.js"></script>
   </head>
   <body>
     <div class="menu">
@@ -11,7 +12,7 @@
         <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
       </div>
     <h1>Cobradores</h1>
-    <input type="text" id="buscar-cobradores" placeholder="Buscar...">
+    <input type="text" id="search-cobradores" placeholder="Buscar..." onkeyup="doSearch()" />
     <table id="cobradores-table">
       <thead>
         <tr>
@@ -30,32 +31,6 @@
       <tbody>
       </tbody>
     </table>
-
-    <script>
-      fetch('https://ejemplo.com/api/cobradores')
-        .then(response => response.json())
-        .then(data => {
-          const tableBody = document.querySelector('#cobradores-table tbody');
-
-          data.forEach(cobrador => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-              <td>${cobrador.id_factura}</td>
-              <td>${cobrador.id_cliente}</td>
-              <td>${cobrador.direccion}</td>
-              <td>${cobrador.fecha}</td>
-              <td>${cobrador.numero_factura}</td>
-              <td>${cobrador.importe}</td>
-              <td>${cobrador.estado}</td>
-              <td>${cobrador.comentarios}</td>
-              <td>Lista de Acciones</td>
-              <td><input type="checkbox" ${cobrador.cobrado ? 'checked' : ''}></td>
-            `;
-            tableBody.appendChild(row);
-          });
-        })
-        .catch(error => console.error(error));
-    </script>
   </body>
 </html>
 
