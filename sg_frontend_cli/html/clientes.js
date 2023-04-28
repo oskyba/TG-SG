@@ -20,14 +20,29 @@ function cargarClientes()
                     <td><div contenteditable="true" maxlength="30">${cliente.address.street}</div></td>
                     <td><div contenteditable="true" maxlength="30">${cliente.email}</div></td>
                     <td>
-                        <button class="btn btn-secondary btn-sm" onclick="modificarCliente()">Guardar</button>
-                        <button class="btn btn-secondary btn-sm" onclick="eliminarCliente()">Eliminar</button>
+                        <button class="btn btn-secondary btn-sm" onclick="modificarCliente(this)">Guardar</button>
+                        <button class="btn btn-secondary btn-sm" onclick="eliminarCliente(this)">Eliminar</button>
                     </td>  
               `;
               tbody.appendChild(row);
+
+              $("div[contenteditable='true'][maxlength]").on('keyup paste', function (event) {
+                var cntMaxLength = parseInt($(this).attr('maxlength'));
+                if ($(this).text().length >= cntMaxLength && event.keyCode != 8 && 
+                                             event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 39 && 
+                                             event.keyCode != 40) {
+                  event.preventDefault();
+                  $(this).html(function(i, currentHtml) {
+                     return currentHtml.substring(0, cntMaxLength-1);
+                  });
+                }
+                });
+                
             });
           })
-          .catch(error => console.error(error));
+          .catch(error => {
+            cargarFeedbackSystem(); 
+          });
 }
 
 function doSearch()
@@ -71,9 +86,12 @@ function showModal()
         modal.style.display = "block";
     }
 
-    function modificarCliente() 
+    function modificarCliente(boton) 
     {
-        const fila  = document.querySelectorAll('#client-table tbody tr')[0];
+        var preFila = boton.parentNode.parentNode;
+        var posicion = Array.prototype.indexOf.call(preFila.parentNode.children, preFila);
+
+        const fila  = document.querySelectorAll('#client-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
 
         const nombre = fila.querySelectorAll('td')[1].textContent;
@@ -94,6 +112,7 @@ function showModal()
             })
         })
         .then(response => {
+            if (!response.ok) throw Error(response.status);
             cargarClientes();  
             cargarFeedbackOK(); 
         })
@@ -125,6 +144,7 @@ function showModal()
                 })
         })
         .then(response => {
+            if (!response.ok) throw Error(response.status);
             closeModal();
             cargarClientes();
             cargarFeedbackOK(); 
@@ -146,9 +166,18 @@ function showModal()
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
-    function eliminarCliente() 
+    function cargarFeedbackSystem() {
+        var x = document.getElementById("snackbarSystem");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    function eliminarCliente(boton) 
     {
-        const fila  = document.querySelectorAll('#client-table tbody tr')[0];
+        var preFila = boton.parentNode.parentNode;
+        var posicion = Array.prototype.indexOf.call(preFila.parentNode.children, preFila);
+
+        const fila  = document.querySelectorAll('#client-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
 
         fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
@@ -158,6 +187,7 @@ function showModal()
             },
           })
         .then(response => {
+            if (!response.ok) throw Error(response.status);
             cargarClientes(); 
             cargarFeedbackOK();  
           })
