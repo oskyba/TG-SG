@@ -3,6 +3,7 @@
     <title>Cobradores</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="cobradores.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
     <div class="menu">
@@ -25,12 +26,21 @@
           <th>Estado</th>
           <th>Comentarios</th>
           <th>Acciones</th>
-          <th>Cobrado</th>
         </tr>
       </thead>
       <tbody>
       </tbody>
     </table>
+    <div id="snackbar">Comentario actualizado con éxito</div>
+    <div id="snackbarError">Hubo un problema al actualizar el registro</div>
+    <div id="snackbarSystem">Hubo un problema al recuperar los registros</div>
+    <script>	
+      window.onload = (event) =>{
+    
+        cargarCobradores();
+      
+      };
+        </script>
   </body>
 </html>
 
