@@ -1,3 +1,5 @@
+let direccionCliente;
+
 function doSearch()
         {
             const tableReg = document.getElementById('cobradores-table');
@@ -35,43 +37,44 @@ function doSearch()
 
     function cargarCobradores() 
     { 
-        fetch('https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/contactabilidad')
+        fetch('https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas')
           .then(response => response.json())
           .then(data => {
             const tabla = document.getElementById('cobradores-table');
             const tbody = tabla.querySelector('tbody');
-            data.forEach(cobrador => {
-              const row = document.createElement('tr');
+            data.forEach(factura => {
+                if (factura.estado === "Coordinado") {
+                    fetch(`https://jsonplaceholder.typicode.com/users/${factura.idCliente}`)
+                        .then (response => response.json())
+                        .then (data => {
+                            if (data.success) {
+                                direccionCliente = data.address;
+                            } else {
+                                cargarFeedbackSystem();
+                            }
+                        })
+                        .catch(error => {
+                            cargarFeedbackSystem();
+                        });
+                    const row = document.createElement('tr');
 
-                 /* row.innerHTML = `
-                    <td><div>${cobrador.idFactura}</div></td>
-                    <td><div>${cobrador.idCliente}</div></td>
-                    <td><div>${cobrador.direccion}</div></td>
-                    <td><div>${cobrador.fechaCobro}</div></td>
-                    <td><div>${cobrador.numeroFactura}</div></td>
-                    <td><div>${cobrador.importe}</div></td>
-                    <td><div>${cobrador.estado}</div></td>
-                    <td><div contenteditable="true" maxlength="50">${cobrador.comentario}</div></td>
+                    row.innerHTML = `
+                    <td><div>${factura.idFactura}</div></td>
+                    <td><div>${factura.idCliente}</div></td>
+                    <td><div>${direccionCliente}</div></td>
+                    <td><div>${factura.fechaCobro}</div></td>
+                    <td><div>${factura.numeroFactura}</div></td>
+                    <td><div>${factura.importe}</div></td>
+                    <td><div>${factura.estado}</div></td>
+                    <td><div contenteditable="true" maxlength="50">${factura.comentario}</div></td>
                     <td>
-                        <button class="btn btn-secondary btn-sm" onclick="modidificarComentario(this)">Guardar</button>
+                        <button class="btn btn-secondary btn-sm" onclick="recoordinarContacto(this)">Recoordinar</button>
                         <button class="btn btn-secondary btn-sm" onclick="cobrarFactura(this)">Cobrar</button>
                     </td>
-                  `; */
-                   row.innerHTML = `
-                    <td><div>1</div></td>
-                    <td><div>1</div></td>
-                    <td><div>Calle Falsa 123</div></td>
-                    <td><div>28/04/2023</div></td>
-                    <td><div>3</div></td>
-                    <td><div>1000</div></td>
-                    <td><div>Contactado</div></td>
-                    <td><div contenteditable="true" maxlength="50">No se</div></td>
-                    <td>
-                    <button class="btn btn-secondary btn-sm" onclick="modidificarComentario(this)">Guardar</button>
-                    <button class="btn btn-secondary btn-sm" onclick="cobrarFactura(this)">Cobrar</button>
-                    </td>
                     `; 
+
                     tbody.appendChild(row);
+                }
 
                     $("div[contenteditable='true'][maxlength]").on('keyup paste', function (event) {
                         var cntMaxLength = parseInt($(this).attr('maxlength'));
@@ -116,7 +119,7 @@ function doSearch()
 
     }
 
-    function modidificarComentario(boton) {
+    function recoordinarContacto(boton) {
 
         var preFila = boton.parentNode.parentNode;
         var posicion = Array.prototype.indexOf.call(preFila.parentNode.children, preFila);
@@ -131,6 +134,7 @@ function doSearch()
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          estado: "Pendiente de coordinar",
           comentario: comentario
         })
     })
@@ -153,6 +157,12 @@ function doSearch()
 
     function cargarFeedbackError() {
         var x = document.getElementById("snackbarError");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    function cargarFeedbackSystem() {
+        var x = document.getElementById("snackbarSystem");
         x.className = "show";
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }

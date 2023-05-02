@@ -1,3 +1,6 @@
+let telefonoCliente;
+let emailCliente;
+
 function doSearch()
         {
             const tableReg = document.getElementById('contactabilidad-table');
@@ -41,49 +44,45 @@ function limpiarTabla() {
 function cargarContactabilidad() 
 { 
         limpiarTabla();
-        fetch('https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/contactabilidad')
+        fetch('https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas')
           .then(response => response.json())
           .then(data => {
             const tabla = document.getElementById('contactabilidad-table');
             const tbody = tabla.querySelector('tbody');
-            data.forEach(contacto => {
-              const row = document.createElement('tr');
-              row.innerHTML = `
-                    <td><div>${contacto.idFactura}</div></td>
-                    <td><div>${contacto.idCliente}</div></td>
-                    <td><div>${contacto.fechaEmision}</div></td>
-                    <td><div>${contacto.numeroFactura}</div></td>
-                    <td><div>${contacto.importe}</div></td>
-                    <td><div>${contacto.telefono}</div></td>
-                    <td><div>${contacto.email}</div></td>
-                    <td><div>${contacto.fechaVencimiento}</div></td>
+            data.forEach(factura => {
+                if (factura.estado === "Pendiente de coordinar") {
+                    fetch(`https://jsonplaceholder.typicode.com/users/${factura.idCliente}`)
+                        .then (response => response.json())
+                        .then (data => {
+                            if (data.success) {
+                                telefonoCliente = data.phone;
+                                emailCliente    = data.email;
+                            } else {
+                                cargarFeedbackSystem();
+                            }
+                        })
+                        .catch(error => {
+                            cargarFeedbackSystem();
+                        });
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                    <td><div>${factura.idFactura}</div></td>
+                    <td><div>${factura.idCliente}</div></td>
+                    <td><div>${factura.fechaEmision}</div></td>
+                    <td><div>${factura.numeroFactura}</div></td>
+                    <td><div>${factura.importe}</div></td>
+                    <td><div>${telefonoCliente}</div></td>
+                    <td><div>${emailCliente}</div></td>
+                    <td><div>${factura.fechaVencimiento}</div></td>
                     <td>
                     <input name="date" class="datepicker-input" type="hidden" />
-                    <div class="date" contenteditable="true" maxlength="10">${contacto.fechaCobro}</div>
-                </td>
-                <td><div id="estado" contenteditable="true" maxlength="30">${contacto.estado}</div></td>
-              `; 
-              tbody.appendChild(row); 
-             /*               row.innerHTML = `
-                    <td><div>1</div></td>
-                    <td><div>1</div></td>
-                    <td>
-                        <input name="date" class="datepicker-input" type="hidden" />
-                        <div class="date" contenteditable="true" maxlength="10">27/04/2023</div>
+                    <div class="date" contenteditable="true" maxlength="10">${factura.fechaCobro}</div>
                     </td>
-                    <td><div contenteditable="true" maxlength="15">0001</div></td>
-                    <td><div contenteditable="true" maxlength="18">1000.10</div></td>
-                    <td><div contenteditable="true" maxlength="30">Pendiente</div></td>
-                    <td>
-                        <input name="date" class="datepicker-input" type="hidden" />
-                        <div id="date" class="date" contenteditable="true" maxlength="10"></div>
-                    </td>
-                    <td>    
-                        <button class="btn btn-secondary btn-sm" onclick="modificarFactura()">Guardar</button>
-                        <button class="btn btn-secondary btn-sm" onclick="eliminarFactura()">Eliminar</button>
-                    </td>  
-              `; 
-              tbody.appendChild(row) ;*/
+                    <td><div>${factura.comentario}</div></td>
+                    <td><div id="estado" contenteditable="true" maxlength="30">${factura.estado}</div></td>
+                    `; 
+                    tbody.appendChild(row); 
+            }
 
               $('.datepicker-input').datepicker({
                 closeText: 'Cerrar',
@@ -163,6 +162,12 @@ function cargarFeedbackOK() {
 
 function cargarFeedbackError() {
     var x = document.getElementById("snackbarError");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function cargarFeedbackSystem() {
+    var x = document.getElementById("snackbarSystem");
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
