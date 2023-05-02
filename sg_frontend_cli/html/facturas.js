@@ -22,17 +22,40 @@ function cargarFacturas()
                     </td>
                     <td><div contenteditable="true" maxlength="15">${facturas.numeroFactura}</div></td>
                     <td><div contenteditable="true" maxlength="30">${facturas.importe}</div></td>
-                    <td><div contenteditable="true" maxlength="30">${facturas.estado}</div></td>
+                    <td><div>
+                    <select id="listaEstado">${facturas.estado}
+                        <option value="Pendiente de coordinar">Pendiente de coordinar</value>
+                        <option value="Coordinado">Coordinado</value>
+                        <option value="Cobrado">Cobrado</value>
+                    </select>
+                    </div></td>
                     <td>
                         <input name="date" class="datepicker-input" type="hidden" />
                         <div id="date" class="date" contenteditable="true" maxlength="10">${facturas.fechaVencimiento}</div>
                     </td>
                     <td>
+                        <input name="date" class="datepicker-input" type="hidden" />
+                        <div id="date" class="date" contenteditable="true" maxlength="10">${facturas.fechaCobro}</div>
+                    </td>
+                    <td><div>${facturas.comentaros}</div></td>
+                    <td>
                         <button class="btn btn-secondary btn-sm" onclick="modificarFactura(this)">Guardar</button>
                         <button class="btn btn-secondary btn-sm" onclick="eliminarFactura(this)">Eliminar</button>
                     </td>  
               `; 
+   
+
               tbody.appendChild(row); 
+              
+              const valorSeleccionado = facturas.estado;
+              const listaEstado = document.getElementById("listaEstado");
+              for (let i = 0; i < listaEstado.options.length; i++) {
+                // Si el valor del elemento es igual al valor seleccionado de la API, lo seleccionamos
+                if (listaEstado.options[i].value === valorSeleccionado) {
+                    listaEstado.selectedIndex = i;
+                    break;
+                }
+                }
 
               $('.datepicker-input').datepicker({
                 closeText: 'Cerrar',
@@ -57,11 +80,7 @@ function cargarFacturas()
     
                 $('.date').click(function() {
                     $(this).parent().find('.datepicker-input').datepicker("show");
-                });
-
-                $('.botonEliminar').click(function() {
-                    $(this).closest('tr').remove();
-                  });
+                }); 
 
                 $("div[contenteditable='true'][maxlength]").on('keyup paste', function (event) {
                     var cntMaxLength = parseInt($(this).attr('maxlength'));
@@ -87,8 +106,11 @@ function agregarFactura()
     const fechaEmision     = document.getElementById('fechaEmision').textContent;
     const numeroFactura    = document.getElementById('numeroFactura').textContent;
     const importe          = document.getElementById('importe').textContent;
-    const estado           = document.getElementById('estado').textContent;
+    const estado           = "Pendiente de coordinar";
     const fechaVencimiento = document.getElementById('fechaVencimiento').textContent;
+    const fechaCobro       = "";
+    const comentarios      = "";
+
 
     fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas`, {
         method: 'POST',
@@ -103,7 +125,9 @@ function agregarFactura()
                 numeroFactura: numeroFactura,
                 importe: importe,
                 estado: estado,
-                fechaVencimiento: fechaVencimiento
+                fechaVencimiento: fechaVencimiento,
+                fechaCobro: fechaCobro,
+                comentarios: comentarios
             })
     })
     .then(response => {
@@ -129,7 +153,7 @@ function modificarFactura(boton)
     const fechaEmision = fila.querySelectorAll('td')[2].textContent;
     const numeroFactura = fila.querySelectorAll('td')[3].textContent;
     const importe = fila.querySelectorAll('td')[4].textContent; 
-    const estado = fila.querySelectorAll('td')[5].textContent; 
+    const estado = fila.querySelector('#listaEstado option:checked').value;
     const fechaVencimiento = fila.querySelectorAll('td')[6].textContent; 
 
     fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
