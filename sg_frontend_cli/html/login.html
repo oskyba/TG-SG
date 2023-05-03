@@ -6,23 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar sesión</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
-  <script src="login.js"></script>
 </head>
 
 <body>
     <div class="center fade">
 		<img class="rotate" src="logo.png" alt="Imagen giratoria">
 	</div>
-  <form>
+  <form id="login-form">
     <h2>Iniciar sesión</h2>
-    
+
     <label for="username">Nombre de usuario</label>
     <input type="text" id="username" name="username" required>
 
     <label for="password">Contraseña</label>
     <input type="password" id="password" name="password" required>
     <p></p>
-    <button id="iniciarSesion" onclick="iniciarSesion()">Iniciar sesión</button>
+    <button type="submit">Iniciar sesión</button>
     <p></p>
     <div>
       ¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a>
@@ -30,4 +29,5 @@
   </form>
   <div id="snackbarError">Nombre de usuario y/o constraseña inválidos</div>
  </body>
+ <script src="login.js"></script>
 </html>

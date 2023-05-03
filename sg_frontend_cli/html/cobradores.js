@@ -1,4 +1,4 @@
-let direccionCliente;
+let clienteDireccion;
 
 function doSearch()
         {
@@ -42,27 +42,16 @@ function doSearch()
           .then(data => {
             const tabla = document.getElementById('cobradores-table');
             const tbody = tabla.querySelector('tbody');
-            data.forEach(factura => {
+            data.forEach(async factura => {
                 if (factura.estado === "Coordinado") {
-                    fetch(`https://jsonplaceholder.typicode.com/users/${factura.idCliente}`)
-                        .then (response => response.json())
-                        .then (data => {
-                            if (data.success) {
-                                direccionCliente = data.address;
-                            } else {
-                                cargarFeedbackSystem();
-                            }
-                        })
-                        .catch(error => {
-                            cargarFeedbackSystem();
-                        });
+                    await setDatosClientes(factura.idCliente);
+                    const dateCobro = dayjs(factura.fechaCobro).format('DD/MM/YYYY');
                     const row = document.createElement('tr');
-
                     row.innerHTML = `
-                    <td><div>${factura.idFactura}</div></td>
+                    <td><div>${factura.id}</div></td>
                     <td><div>${factura.idCliente}</div></td>
-                    <td><div>${direccionCliente}</div></td>
-                    <td><div>${factura.fechaCobro}</div></td>
+                    <td><div>${clienteDireccion}</div></td>
+                    <td><div>${dateCobro}</div></td>
                     <td><div>${factura.numeroFactura}</div></td>
                     <td><div>${factura.importe}</div></td>
                     <td><div>${factura.estado}</div></td>
@@ -72,9 +61,7 @@ function doSearch()
                         <button class="btn btn-secondary btn-sm" onclick="cobrarFactura(this)">Cobrar</button>
                     </td>
                     `; 
-
                     tbody.appendChild(row);
-                }
 
                     $("div[contenteditable='true'][maxlength]").on('keyup paste', function (event) {
                         var cntMaxLength = parseInt($(this).attr('maxlength'));
@@ -87,6 +74,7 @@ function doSearch()
                           });
                         }
                         });
+                    }
                 });
               })
               .catch(error => console.error(error));
@@ -134,7 +122,7 @@ function doSearch()
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          estado: "Pendiente de coordinar",
+          estado: "A coordinar",
           comentario: comentario
         })
     })
@@ -165,4 +153,20 @@ function doSearch()
         var x = document.getElementById("snackbarSystem");
         x.className = "show";
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    async function getDatosClientes(id) {
+        try {
+            const response = await fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes/${id}`);
+            const data = await response.json();
+            console.log(data);
+            return data;
+    
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    async function setDatosClientes(id) {
+        const clienteDireccionGet = await getDatosClientes(id);
+        clienteDireccion = clienteDireccionGet.direccion;
     }

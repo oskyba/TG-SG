@@ -36,6 +36,7 @@ CREATE TABLE telpop.facturas (
 	importe DECIMAL(16,2) NOT NULL,
 	estado VARCHAR(22) NOT NULL,
 	fechaVencimiento DATE NOT NULL,
+	fechaCobro DATE,
 	comentarios VARCHAR(50),
 	FOREIGN KEY (idCliente) REFERENCES telpop.clientes (id)
 );

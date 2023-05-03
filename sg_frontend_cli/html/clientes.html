@@ -8,14 +8,16 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
-    <div class="menu">
+    <hr size="4px" color="#008080"/>
+    <div class="centerMenu">
         <button onclick="window.location.href='clientes.html'">Clientes</button>
         <button onclick="window.location.href='facturas.html'">Facturas</button>
         <button onclick="window.location.href='cobradores.html'">Cobradores</button>
         <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
     </div>
-    <h1>Clientes</h1>
-    <p><button id="add-client-button" onclick="showModal()">Agregar cliente</button></p>
+    <hr size="4px" color="#008080"/>
+    <h1 class="center">Clientes</h1>
+    <p><div class="right"><button id="add-client-button" onclick="showModal()">Agregar cliente</button></div></p>
 
     <input type="text" id="search-clients" placeholder="Buscar..." onkeyup="doSearch()" />
     <table id="client-table">

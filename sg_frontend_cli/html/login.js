@@ -1,28 +1,39 @@
-function iniciarSesion() {
+const loginForm = document.getElementById('login-form');
+const apiUrl = 'https://dummyjson.com/auth/login';
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    
-    fetch('https://dummyjson.com/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            usuario: username,
-            contraseña: password
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            localStorage.setItem("token", data.token);
-            window.location.href = "dashboard.html";
-        } else {
-            cargarFeedbackError(); 
-        }
-    })
-    .catch(error => {
-            cargarFeedbackError(); 
-          });
+loginForm.addEventListener('submit', async event => {
+  event.preventDefault();
+
+  const formData = new FormData(loginForm);
+  const requestBody = {
+    username: formData.get('username'),
+    password: formData.get('password')
+  };
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody)
+    });
+
+    if (response.ok) {
+      const responseBody = await response.json();
+      const authToken = responseBody.token;
+      localStorage.setItem('authToken', authToken);
+      window.location.href = "dashboard.html";
+    } else {
+        cargarFeedbackError(); 
     }
+  } catch (error) {
+    cargarFeedbackError(); 
+  }
+});
+
+function cargarFeedbackError() {
+    var x = document.getElementById("snackbarError");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
