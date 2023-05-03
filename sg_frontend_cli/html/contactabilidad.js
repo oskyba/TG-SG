@@ -1,5 +1,8 @@
-let telefonoCliente;
-let emailCliente;
+let clienteCorreo;
+let clienteTelefono;
+let dateEmision;
+let dateVencimiento;
+let dateCobro;
 
 function doSearch()
         {
@@ -49,41 +52,31 @@ function cargarContactabilidad()
           .then(data => {
             const tabla = document.getElementById('contactabilidad-table');
             const tbody = tabla.querySelector('tbody');
-            data.forEach(factura => {
-                if (factura.estado === "Pendiente de coordinar") {
-                    fetch(`https://jsonplaceholder.typicode.com/users/${factura.idCliente}`)
-                        .then (response => response.json())
-                        .then (data => {
-                            if (data.success) {
-                                telefonoCliente = data.phone;
-                                emailCliente    = data.email;
-                            } else {
-                                cargarFeedbackSystem();
-                            }
-                        })
-                        .catch(error => {
-                            cargarFeedbackSystem();
-                        });
+            data.forEach(async factura => {
+                if (factura.estado === "A coordinar") {
+                    await setDatosClientes(factura.idCliente);
+                    dateEmision = dayjs(factura.fechaEmision).format('DD/MM/YYYY');
+                    dateVencimiento = dayjs(factura.fechaVencimiento).format('DD/MM/YYYY');
+                    dateCobro = dayjs(factura.fechaCobro).format('DD/MM/YYYY'); 
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                    <td><div>${factura.idFactura}</div></td>
+                    <td><div>${factura.id}</div></td>
                     <td><div>${factura.idCliente}</div></td>
-                    <td><div>${factura.fechaEmision}</div></td>
+                    <td><div>${dateEmision}</div></td>
                     <td><div>${factura.numeroFactura}</div></td>
                     <td><div>${factura.importe}</div></td>
-                    <td><div>${telefonoCliente}</div></td>
-                    <td><div>${emailCliente}</div></td>
-                    <td><div>${factura.fechaVencimiento}</div></td>
+                    <td><div>${clienteTelefono}</div></td>
+                    <td><div>${clienteCorreo}</div></td>
+                    <td><div>${dateVencimiento}</div></td>
                     <td>
                     <input name="date" class="datepicker-input" type="hidden" />
-                    <div class="date" contenteditable="true" maxlength="10">${factura.fechaCobro}</div>
+                    <div class="date" contenteditable="true" maxlength="10">${dateCobro}</div>
                     </td>
                     <td><div>${factura.comentario}</div></td>
                     <td><div id="estado" contenteditable="true" maxlength="30">${factura.estado}</div></td>
                     `; 
                     tbody.appendChild(row); 
-            }
-
+                
               $('.datepicker-input').datepicker({
                 closeText: 'Cerrar',
                 currentText: 'Hoy',
@@ -121,7 +114,8 @@ function cargarContactabilidad()
                       });
                     }
                 });
-
+            }
+            
             });
           })
           .catch(error => console.error(error));
@@ -170,4 +164,22 @@ function cargarFeedbackSystem() {
     var x = document.getElementById("snackbarSystem");
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+async function getDatosClientes(id) {
+    try {
+        const response = await fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes/${id}`);
+        const data = await response.json();
+        console.log(data);
+        return data;
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+async function setDatosClientes(id) {
+    const clienteTelefonoGet = await getDatosClientes(id);
+    clienteTelefono = clienteTelefonoGet.telefono;
+    clienteCorreo = clienteTelefonoGet.email;
+    return clienteTelefonoGet;
 }

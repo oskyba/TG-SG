@@ -3,16 +3,19 @@
     <title>Cobradores</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="cobradores.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
-    <div class="menu">
+    <hr size="4px" color="#008080"/>
+    <div class="centerMenu">
         <button onclick="window.location.href='clientes.html'">Clientes</button>
         <button onclick="window.location.href='facturas.html'">Facturas</button>
         <button onclick="window.location.href='cobradores.html'">Cobradores</button>
         <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
       </div>
-    <h1>Cobradores</h1>
+      <hr size="4px" color="#008080"/>
+    <h1 class="center">Cobradores</h1>
     <input type="text" id="search-cobradores" placeholder="Buscar..." onkeyup="doSearch()" />
     <table id="cobradores-table">
       <thead>

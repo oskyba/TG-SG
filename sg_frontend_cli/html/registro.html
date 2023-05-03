@@ -8,20 +8,25 @@
 <body>
 	<h1 class="center" >Registro de Usuario</h1>
 	<div class="center"><a href="login.html">¿Ya tienes una cuenta? Inicia sesión aquí</a></div>
-	<form>
+	<form id="register-form">
 		<label for="username">Nombre de usuario</label>
 		<input type="text" id="username" name="username" required>
-
-		<label for="email">Correo electrónico</label>
-		<input type="text" id="email" name="email" required>
-
-		<label for="name">Nombre</label>
-		<input type="text" id="name" name="name" required>
-
 		<label for="password">Contraseña</label>
 		<input type="password" id="password" name="password" required>
+		<label for="email">Correo electrónico</label>
+		<input type="text" id="email" name="email" required>
+		<label for="nombre">Nombre</label>
+		<input type="text" id="nombre" name="nombre" required>
+		<label for="apellido">Apellido</label>
+		<input type="text" id="apellido" name="apellido" required>
+		<label for="telefono">Teléfono</label>
+		<input type="text" id="telefono" name="telefono" required>
 		<p></p>
-		<button id="registrar" onclick="registrarUsuario()">Registrar</button>
+		<button type="submit">Registrarse</button>
 	</form>
+	<div id="snackbar">Usuario registrado correctamente. Por favor, inicie sesión</div>
+	<div id="snackbarError">No se pudo registrar el usuario</div>
+	<script src="registro.js"></script>
 </body>
+
 </html>

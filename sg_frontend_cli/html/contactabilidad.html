@@ -5,19 +5,22 @@
 	<title>Contactabilidad</title>
 	<link rel="stylesheet" href="styles.css">
 	<script src="contactabilidad.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header>
-        <div class="menu">
+		<hr size="4px" color="#008080"/>
+        <div class="centerMenu">
             <button onclick="window.location.href='clientes.html'">Clientes</button>
             <button onclick="window.location.href='facturas.html'">Facturas</button>
             <button onclick="window.location.href='cobradores.html'">Cobradores</button>
             <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
           </div>
+		  <hr size="4px" color="#008080"/>
 	</header>
-		<h1>Contactabilidad</h1>
+		<h1 class="center">Contactabilidad</h1>
 	<main>
 		<input type="text" id="search-contactabilidad" placeholder="Buscar..." onkeyup="doSearch()" />
 		<table id="contactabilidad-table">

@@ -6,7 +6,7 @@ function limpiarTabla() {
 function cargarClientes() 
 { 
         limpiarTabla();
-        fetch('https://jsonplaceholder.typicode.com/users')
+        fetch('https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes')
           .then(response => response.json())
           .then(data => {
             const tabla = document.getElementById('client-table');
@@ -15,9 +15,9 @@ function cargarClientes()
               const row = document.createElement('tr');
               row.innerHTML = `
                     <td><div>${cliente.id}</div></td>
-                    <td><div contenteditable="true" maxlength="30">${cliente.name}</div></td>
-                    <td><div contenteditable="true" maxlength="15">${cliente.phone}</div></td>
-                    <td><div contenteditable="true" maxlength="30">${cliente.address.street}</div></td>
+                    <td><div contenteditable="true" maxlength="30">${cliente.nombre}</div></td>
+                    <td><div contenteditable="true" maxlength="15">${cliente.telefono}</div></td>
+                    <td><div contenteditable="true" maxlength="30">${cliente.direccion}</div></td>
                     <td><div contenteditable="true" maxlength="30">${cliente.email}</div></td>
                     <td>
                         <button class="btn btn-secondary btn-sm" onclick="modificarCliente(this)">Guardar</button>
@@ -99,15 +99,15 @@ function showModal()
         const direccion = fila.querySelectorAll('td')[3].textContent;
         const email = fila.querySelectorAll('td')[4].textContent; 
 
-        fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+        fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              name: nombre,
-              phone: telefono,
-              street: direccion,
+              nombre: nombre,
+              telefono: telefono,
+              direccion: direccion,
               email: email,
             })
         })
@@ -129,7 +129,7 @@ function showModal()
         const direccion =  document.getElementById('address-input').textContent;
         const email     = document.getElementById('email-input').textContent;
 
-        fetch(`https://jsonplaceholder.typicode.com/users`, {
+        fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -137,10 +137,10 @@ function showModal()
             body: JSON.stringify(
                 {
                     id: id,
-                    name: nombre,
-                    email: email,
-                    street: direccion,
-                    phone: telefono
+                    nombre: nombre,
+                    telefono: telefono, 
+                    direccion: direccion,
+                    email: email
                 })
         })
         .then(response => {
@@ -180,7 +180,7 @@ function showModal()
         const fila  = document.querySelectorAll('#client-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
 
-        fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+        fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clients/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
