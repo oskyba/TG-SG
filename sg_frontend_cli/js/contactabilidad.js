@@ -181,7 +181,6 @@ async function getDatosClientes(id) {
     try {
         const response = await fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes/${id}`);
         const data = await response.json();
-        console.log(data);
         return data;
 
     } catch (error) {
