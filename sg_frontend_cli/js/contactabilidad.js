@@ -92,14 +92,12 @@ function cargarContactabilidad()
                     const previousDate = $date.text().trim();
                   
                     if (dateText === '') {
-                      // Si no seleccioné una fecha del datepicker, no hacer nada
-                      $date.text(previousDate); // Restaurar el valor anterior
+                      $date.text(previousDate);
                       return;
                     }
                   
                     if (dateText !== previousDate) {
-                      // Si seleccioné una fecha del datepicker o borré el valor manualmente
-                      $date.text(dateText); // Actualizar el valor
+                      $date.text(dateText)
                       actualizarEstadoFactura(this);
                     }
                   }
