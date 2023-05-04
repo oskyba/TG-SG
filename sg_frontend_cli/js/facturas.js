@@ -67,8 +67,18 @@ function cargarFacturas()
                 isRTL: false,
                 showMonthAfterYear: false,
                 onClose: function(dateText, inst) {
-                    $(this).parent().find('.date').focus().html(dateText).blur();
-                }
+                    const $date = $(this).parent().find('.date');
+                    const previousDate = $date.text().trim();
+                  
+                    if (dateText === '') {
+                      $date.text(previousDate); 
+                      return;
+                    }
+                  
+                    if (dateText !== previousDate) {
+                      $date.text(dateText); 
+                    }
+                  }
                 });
     
                 $('.date').click(function() {
@@ -101,7 +111,7 @@ function agregarFactura()
     const estado           = "A coordinar";
     const fechaVencimiento = document.getElementById('fechaVencimiento').value;
     const fechaCobro       = "";
-    const contactadoPor = "";
+    const contactadoPor    = "";
     const cobradorAsignado = "";
     const comentarios      = "";
 
