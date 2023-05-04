@@ -1,5 +1,11 @@
 let clienteDireccion;
 
+function limpiarTabla() 
+{
+    const tbody = document.querySelector("tbody");
+    tbody.innerHTML = "";
+}
+
 function doSearch()
         {
             const tableReg = document.getElementById('cobradores-table');
@@ -37,6 +43,7 @@ function doSearch()
 
     function cargarCobradores() 
     { 
+        limpiarTabla();
         fetch('https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas')
           .then(response => response.json())
           .then(data => {
@@ -45,23 +52,32 @@ function doSearch()
             data.forEach(async factura => {
                 if (factura.estado === "Coordinado") {
                     await setDatosClientes(factura.idCliente);
-                    const dateCobro = dayjs(factura.fechaCobro).format('DD/MM/YYYY');
+                    let celdaCobradorAsignado;
+                    if (factura.cobradorAsignado === "null" || factura.cobradorAsignado === null || factura.cobradorAsignado === "") {
+                        celdaCobradorAsignado = '<button class="btn btn-secondary btn-sm" onclick="asignarCobrador(this)">Asignar</button>';
+                    } else {
+                        celdaCobradorAsignado = `${factura.cobradorAsignado}`;
+                    }
                     const row = document.createElement('tr');
+
                     row.innerHTML = `
                     <td><div>${factura.id}</div></td>
                     <td><div>${factura.idCliente}</div></td>
                     <td><div>${clienteDireccion}</div></td>
-                    <td><div>${dateCobro}</div></td>
+                    <td><div>${factura.fechaCobro}</div></td>
                     <td><div>${factura.numeroFactura}</div></td>
                     <td><div>${factura.importe}</div></td>
                     <td><div>${factura.estado}</div></td>
-                    <td><div contenteditable="true" maxlength="50">${factura.comentario}</div></td>
+                    <td><div id="cobradorAsignado">${celdaCobradorAsignado}</div></td>
+                    <td><div contenteditable="true" maxlength="50">${factura.comentarios}</div></td>
                     <td>
                         <button class="btn btn-secondary btn-sm" onclick="recoordinarContacto(this)">Recoordinar</button>
                         <button class="btn btn-secondary btn-sm" onclick="cobrarFactura(this)">Cobrar</button>
+                        
                     </td>
                     `; 
-                    tbody.appendChild(row);
+                    
+                    tbody.appendChild(row);                
 
                     $("div[contenteditable='true'][maxlength]").on('keyup paste', function (event) {
                         var cntMaxLength = parseInt($(this).attr('maxlength'));
@@ -82,8 +98,8 @@ function doSearch()
 
     function cobrarFactura(boton) {
 
-        var preFila = boton.parentNode.parentNode;
-        var posicion = Array.prototype.indexOf.call(preFila.parentNode.children, preFila);
+        var preFila = boton.closest('tr');
+        var posicion = Array.from(preFila.parentNode.children).indexOf(preFila);
 
         const fila  = document.querySelectorAll('#cobradores-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
@@ -109,12 +125,14 @@ function doSearch()
 
     function recoordinarContacto(boton) {
 
-        var preFila = boton.parentNode.parentNode;
-        var posicion = Array.prototype.indexOf.call(preFila.parentNode.children, preFila);
-
+        var preFila = boton.closest('tr');
+        var posicion = Array.from(preFila.parentNode.children).indexOf(preFila);
         const fila  = document.querySelectorAll('#cobradores-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
-        const comentario = fila.querySelectorAll('td')[7].textContent;
+        const comentario = fila.querySelectorAll('td')[8].textContent;
+        const fechaCobro = "";
+        const estado = "A coordinar";
+        const cobradorAsignado = "";
 
         fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
          method: 'PUT',
@@ -122,13 +140,43 @@ function doSearch()
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          estado: "A coordinar",
+          estado: estado,
+          fechaCobro: fechaCobro,
+          cobradorAsignado: cobradorAsignado,
           comentario: comentario
         })
     })
     .then(response => {
         cargarCobradores();   
         if (!response.ok) throw Error(response.status);
+        cargarFeedbackOK();
+    })
+    .catch(error => {
+        cargarFeedbackError(); 
+      });
+
+    }
+
+    function asignarCobrador(boton) {
+
+        var preFila = boton.closest('tr');
+        var posicion = Array.from(preFila.parentNode.children).indexOf(preFila);
+        const fila  = document.querySelectorAll('#cobradores-table tbody tr')[posicion];
+        const id = fila.querySelectorAll('td')[0].textContent;
+        const cobradorAsignado = localStorage.getItem('username');
+
+        fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
+         method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          cobradorAsignado: cobradorAsignado
+        })
+    })
+    .then(response => {
+        if (!response.ok) throw Error(response.status);
+        cargarCobradores();   
         cargarFeedbackOK();
     })
     .catch(error => {
@@ -159,7 +207,6 @@ function doSearch()
         try {
             const response = await fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes/${id}`);
             const data = await response.json();
-            console.log(data);
             return data;
     
         } catch (error) {

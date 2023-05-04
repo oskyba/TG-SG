@@ -1,4 +1,5 @@
-function limpiarTabla() {
+function limpiarTabla() 
+{
     const tbody = document.querySelector("tbody");
     tbody.innerHTML = "";
 }
@@ -11,52 +12,43 @@ function cargarFacturas()
           .then(data => {
             const tabla = document.getElementById('facturas-table');
             const tbody = tabla.querySelector('tbody');
-            data.forEach(facturas => {
+            data.forEach(async facturas => {
               const row = document.createElement('tr');
-              const dateEmision = dayjs(facturas.fechaEmision).format('DD/MM/YYYY');
-              const dateVencimiento = dayjs(facturas.fechaVencimiento).format('DD/MM/YYYY');
-              const dateCobro = dayjs(facturas.fechaCobro).format('DD/MM/YYYY');
               row.innerHTML = `
                     <td><div>${facturas.id}</div></td>
                     <td><div>${facturas.idCliente}</div></td>
                     <td>
                         <input name="date" class="datepicker-input" type="hidden" />
-                        <div class="date" contenteditable="true" maxlength="10">${dateEmision}</div>
+                        <div class="date" contenteditable="true" maxlength="10">${facturas.fechaEmision}</div>
                     </td>
                     <td><div contenteditable="true" maxlength="15">${facturas.numeroFactura}</div></td>
                     <td><div contenteditable="true" maxlength="30">${facturas.importe}</div></td>
                     </div></td>
                     <td>
                         <input name="date" class="datepicker-input" type="hidden" />
-                        <div id="date" class="date" contenteditable="true" maxlength="10">${dateVencimiento}</div>
+                        <div id="date" class="date" contenteditable="true" maxlength="10">${facturas.fechaVencimiento}</div>
                     </td>
                     <td>
                         <input name="date" class="datepicker-input" type="hidden" />
-                        <div id="date" class="date" contenteditable="true" maxlength="10">${dateCobro}</div>
+                        <div id="date" class="date" contenteditable="true" maxlength="10">${facturas.fechaCobro}</div>
                     </td>
                     <td><div>
-                    <select id="listaEstado">${facturas.estado}
+                    <select id="estado-${facturas.id}">${facturas.estado}
                         <option value="A coordinar">A coordinar</value>
                         <option value="Coordinado">Coordinado</value>
                         <option value="Cobrado">Cobrado</value>
                     </select>
-                    <td><div>${facturas.comentaros}</div></td>
+                    </div></td>
+                    <td><div>${facturas.contactadoPor}</div></td>
+                    <td><div>${facturas.cobradorAsignado}</div></td>
+                    <td><div>${facturas.comentarios}</div></td>
                     <td>
                         <button class="btn btn-secondary btn-sm" onclick="modificarFactura(this)">Guardar</button>
                         <button class="btn btn-secondary btn-sm" onclick="eliminarFactura(this)">Eliminar</button>
                     </td>  
               `; 
               tbody.appendChild(row); 
-
-              const valorSeleccionado = facturas.estado;
-              const listaEstado = document.getElementById("listaEstado");
-              for (let i = 0; i < listaEstado.options.length; i++) {
-                // Si el valor del elemento es igual al valor seleccionado de la API, lo seleccionamos
-                if (listaEstado.options[i].value === valorSeleccionado) {
-                    listaEstado.selectedIndex = i;
-                    break;
-                }
-                }
+              seleccionarOpcion(document.getElementById(`estado-${facturas.id}`), facturas.estado);
 
               $('.datepicker-input').datepicker({
                 closeText: 'Cerrar',
@@ -102,16 +94,16 @@ function cargarFacturas()
 
 function agregarFactura() 
 {
-    const id               = document.getElementById("idFactura").textContent;
     const idCliente        = document.getElementById('idCliente').textContent;
-    const fechaEmision     = document.getElementById('fechaEmision').textContent;
+    const fechaEmision     = document.getElementById('fechaEmision').value;
     const numeroFactura    = document.getElementById('numeroFactura').textContent;
     const importe          = document.getElementById('importe').textContent;
     const estado           = "A coordinar";
-    const fechaVencimiento = document.getElementById('fechaVencimiento').textContent;
+    const fechaVencimiento = document.getElementById('fechaVencimiento').value;
     const fechaCobro       = "";
+    const contactadoPor = "";
+    const cobradorAsignado = "";
     const comentarios      = "";
-
 
     fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas`, {
         method: 'POST',
@@ -120,7 +112,6 @@ function agregarFactura()
         },
         body: JSON.stringify(
             {
-                id: id,
                 idCliente: idCliente,
                 fechaEmision: fechaEmision,
                 numeroFactura: numeroFactura,
@@ -128,6 +119,8 @@ function agregarFactura()
                 estado: estado,
                 fechaVencimiento: fechaVencimiento,
                 fechaCobro: fechaCobro,
+                contactadoPor: contactadoPor,
+                cobradorAsignado: cobradorAsignado,
                 comentarios: comentarios
             })
     })
@@ -144,20 +137,20 @@ function agregarFactura()
 
 function modificarFactura(boton) 
 {
-    var preFila = boton.parentNode.parentNode;
-    var posicion = Array.prototype.indexOf.call(preFila.parentNode.children, preFila);
-
+    var preFila = boton.closest('tr');
+    var posicion = Array.from(preFila.parentNode.children).indexOf(preFila);
     const fila  = document.querySelectorAll('#facturas-table tbody tr')[posicion];
     const id = fila.querySelectorAll('td')[0].textContent;
-
+    
     const idCliente = fila.querySelectorAll('td')[1].textContent;
-    const fechaEmision = fila.querySelectorAll('td')[2].textContent;
+    const fechaEmision = fila.querySelectorAll('td .date')[0].textContent;
     const numeroFactura = fila.querySelectorAll('td')[3].textContent;
     const importe = fila.querySelectorAll('td')[4].textContent; 
-    const estado = fila.querySelector('#listaEstado option:checked').value;
-    const fechaVencimiento = fila.querySelectorAll('td')[6].textContent; 
-    const fechaCobro = "";
+    const estado = fila.querySelector('select').value;
+    const fechaVencimiento = fila.querySelectorAll('td .date')[1].textContent; 
+    const fechaCobro = fila.querySelectorAll('td .date')[2].textContent; 
 
+    console.log(fechaVencimiento);
     fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
         method: 'PUT',
         headers: {
@@ -185,8 +178,8 @@ function modificarFactura(boton)
 
 function eliminarFactura(boton) 
 {
-    var preFila = boton.parentNode.parentNode;
-    var posicion = Array.prototype.indexOf.call(preFila.parentNode.children, preFila);
+    var preFila = boton.closest('tr');
+    var posicion = Array.from(preFila.parentNode.children).indexOf(preFila);
     
     const fila  = document.querySelectorAll('#facturas-table tbody tr')[posicion];
     const id = fila.querySelectorAll('td')[0].textContent;
@@ -208,7 +201,7 @@ function eliminarFactura(boton)
 }
 
 function doSearch()
-        {
+{
             const tableReg = document.getElementById('facturas-table');
             const searchText = document.getElementById('search-facturas').value.toLowerCase();
 
@@ -242,32 +235,44 @@ function doSearch()
             }
         }
 
-        function showModal() 
-    {
-        var modal = document.getElementById("modalFactura");
-        modal.style.display = "block";
+function showModal() 
+{
+    var modal = document.getElementById("modalFactura");
+    modal.style.display = "block";
+}
+
+function closeModal() 
+{
+    var modal = document.getElementById("modalFactura");
+    modal.style.display = "none";
+}
+
+function cargarFeedbackOK() 
+{
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+    
+function cargarFeedbackError() 
+{
+    var x = document.getElementById("snackbarError");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+    
+function cargarFeedbackSystem() 
+{
+    var x = document.getElementById("snackbarSystem");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function seleccionarOpcion(listaEstado, valorSeleccionado) {
+    for (let i = 0; i < listaEstado.options.length; i++) {
+      if (listaEstado.options[i].value === valorSeleccionado) {
+        listaEstado.selectedIndex = i;
+        break;
+      }
     }
-
-        function closeModal()
-        {
-            var modal = document.getElementById("modalFactura");
-            modal.style.display = "none";
-        }
-
-        function cargarFeedbackOK() {
-            var x = document.getElementById("snackbar");
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-        }
-    
-        function cargarFeedbackError() {
-            var x = document.getElementById("snackbarError");
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-        }
-    
-        function cargarFeedbackSystem() {
-            var x = document.getElementById("snackbarSystem");
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-        }
+  }

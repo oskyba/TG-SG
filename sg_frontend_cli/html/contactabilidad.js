@@ -1,8 +1,5 @@
 let clienteCorreo;
 let clienteTelefono;
-let dateEmision;
-let dateVencimiento;
-let dateCobro;
 
 function doSearch()
         {
@@ -55,22 +52,19 @@ function cargarContactabilidad()
             data.forEach(async factura => {
                 if (factura.estado === "A coordinar") {
                     await setDatosClientes(factura.idCliente);
-                    dateEmision = dayjs(factura.fechaEmision).format('DD/MM/YYYY');
-                    dateVencimiento = dayjs(factura.fechaVencimiento).format('DD/MM/YYYY');
-                    dateCobro = dayjs(factura.fechaCobro).format('DD/MM/YYYY'); 
                     const row = document.createElement('tr');
                     row.innerHTML = `
                     <td><div>${factura.id}</div></td>
                     <td><div>${factura.idCliente}</div></td>
-                    <td><div>${dateEmision}</div></td>
+                    <td><div>${factura.fechaEmision}</div></td>
                     <td><div>${factura.numeroFactura}</div></td>
                     <td><div>${factura.importe}</div></td>
                     <td><div>${clienteTelefono}</div></td>
                     <td><div>${clienteCorreo}</div></td>
-                    <td><div>${dateVencimiento}</div></td>
+                    <td><div>${factura.fechaVencimiento}</div></td>
                     <td>
                     <input name="date" class="datepicker-input" type="hidden" />
-                    <div class="date" contenteditable="true" maxlength="10">${dateCobro}</div>
+                    <div class="date" contenteditable="true" maxlength="10">${factura.fechaCobro}</div>
                     </td>
                     <td><div>${factura.comentario}</div></td>
                     <td><div id="estado" contenteditable="true" maxlength="30">${factura.estado}</div></td>
@@ -94,9 +88,21 @@ function cargarContactabilidad()
                 isRTL: false,
                 showMonthAfterYear: false,
                 onClose: function(dateText, inst) {
-                    $(this).parent().find('.date').focus().html(dateText).blur();
-                    actualizarEstadoFactura(this);
-                }
+                    const $date = $(this).parent().find('.date');
+                    const previousDate = $date.text().trim();
+                  
+                    if (dateText === '') {
+                      // Si no seleccioné una fecha del datepicker, no hacer nada
+                      $date.text(previousDate); // Restaurar el valor anterior
+                      return;
+                    }
+                  
+                    if (dateText !== previousDate) {
+                      // Si seleccioné una fecha del datepicker o borré el valor manualmente
+                      $date.text(dateText); // Actualizar el valor
+                      actualizarEstadoFactura(this);
+                    }
+                  }
                 });
     
                 $('.date').click(function() {
@@ -123,11 +129,14 @@ function cargarContactabilidad()
 
 function actualizarEstadoFactura(boton) {
     
-    var preFila = boton.parentNode.parentNode;
-    var posicion = Array.prototype.indexOf.call(preFila.parentNode.children, preFila);
-
+    var preFila = boton.closest('tr');
+    var posicion = Array.from(preFila.parentNode.children).indexOf(preFila);
     const fila  = document.querySelectorAll('#contactabilidad-table tbody tr')[posicion];
     const id = fila.querySelectorAll('td')[0].textContent;
+    
+    const fechaCobro = fila.querySelectorAll('td .datepicker-input')[0].value;
+    const estado = "Coordinado";
+    const contactadoPor = localStorage.getItem('username');
 
     fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
         method: 'PUT',
@@ -135,12 +144,14 @@ function actualizarEstadoFactura(boton) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          estado: "Contactado"
+          estado: estado,
+          fechaCobro: fechaCobro,
+          contactadoPor: contactadoPor
         })
     })
     .then(response => {
-        cargarContactabilidad();   
         if (!response.ok) throw Error(response.status);
+        cargarContactabilidad();   
         cargarFeedbackOK(); 
     })
     .catch(error => {
