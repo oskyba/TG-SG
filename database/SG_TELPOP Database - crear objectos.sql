@@ -29,7 +29,7 @@ CREATE TABLE telpop.clientes (
 );
 
 CREATE TABLE telpop.facturas (
-	id INT PRIMARY KEY,
+	id INT IDENTITY (1,1) PRIMARY KEY,
 	idCliente INT NOT NULL,
 	fechaEmision DATE NOT NULL,
 	numeroFactura VARCHAR(15) NOT NULL,
@@ -38,5 +38,7 @@ CREATE TABLE telpop.facturas (
 	fechaVencimiento DATE NOT NULL,
 	fechaCobro DATE,
 	comentarios VARCHAR(50),
+	contactadoPor varchar(10),
+	cobradorAsignado varchar(10)
 	FOREIGN KEY (idCliente) REFERENCES telpop.clientes (id)
 );

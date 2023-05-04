@@ -23,6 +23,7 @@ loginForm.addEventListener('submit', async event => {
       const responseBody = await response.json();
       const authToken = responseBody.token;
       localStorage.setItem('authToken', authToken);
+      localStorage.setItem('username', username);
       window.location.href = "dashboard.html";
     } else {
         cargarFeedbackError(); 
