@@ -150,7 +150,6 @@ function modificarFactura(boton)
     const fechaVencimiento = fila.querySelectorAll('td .date')[1].textContent; 
     const fechaCobro = fila.querySelectorAll('td .date')[2].textContent; 
 
-    console.log(fechaVencimiento);
     fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
         method: 'PUT',
         headers: {
