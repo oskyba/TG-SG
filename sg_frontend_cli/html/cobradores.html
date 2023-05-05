@@ -2,18 +2,22 @@
   <head>
     <title>Cobradores</title>
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
-    <script src="../js/cobradores.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
     <hr size="4px" color="#008080"/>
-    <div class="centerMenu">
-        <button onclick="window.location.href='clientes.html'">Clientes</button>
-        <button onclick="window.location.href='facturas.html'">Facturas</button>
-        <button onclick="window.location.href='cobradores.html'">Cobradores</button>
-        <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
-      </div>
+		<div class="menu-container">
+			<div class="buttons-container">
+			  <button onclick="window.location.href='clientes.html'">Clientes</button>
+			  <button onclick="window.location.href='facturas.html'">Facturas</button>
+			  <button onclick="window.location.href='cobradores.html'">Cobradores</button>
+			  <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
+			</div>
+			<div class="logout-container">
+			  <a href="#" id="logout-link">Cerrar sesión</a>
+			</div>
+		  </div>
       <hr size="4px" color="#008080"/>
     <h1 class="center">Cobradores</h1>
     <input type="text" id="search-cobradores" placeholder="Buscar..." onkeyup="doSearch()" />
@@ -38,6 +42,8 @@
     <div id="snackbar">Registro actualizado con éxito</div>
     <div id="snackbarError">Hubo un problema al actualizar el registro</div>
     <div id="snackbarSystem">Hubo un problema al recuperar la información</div>
+    <script src="../js/global.js"></script>
+    <script src="../js/cobradores.js"></script>
     <script>	
       window.onload = (event) =>{
         cargarCobradores();

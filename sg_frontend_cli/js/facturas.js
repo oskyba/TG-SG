@@ -256,27 +256,6 @@ function closeModal()
     modal.style.display = "none";
 }
 
-function cargarFeedbackOK() 
-{
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
-    
-function cargarFeedbackError() 
-{
-    var x = document.getElementById("snackbarError");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
-    
-function cargarFeedbackSystem() 
-{
-    var x = document.getElementById("snackbarSystem");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
-
 function seleccionarOpcion(listaEstado, valorSeleccionado) {
     for (let i = 0; i < listaEstado.options.length; i++) {
       if (listaEstado.options[i].value === valorSeleccionado) {

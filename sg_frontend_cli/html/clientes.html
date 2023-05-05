@@ -4,17 +4,21 @@
     <meta charset="utf-8">
     <title>Clientes</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <script src="../js/clientes.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
     <hr size="4px" color="#008080"/>
-    <div class="centerMenu">
-        <button onclick="window.location.href='clientes.html'">Clientes</button>
-        <button onclick="window.location.href='facturas.html'">Facturas</button>
-        <button onclick="window.location.href='cobradores.html'">Cobradores</button>
-        <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
-    </div>
+    <div class="menu-container">
+			<div class="buttons-container">
+			  <button onclick="window.location.href='clientes.html'">Clientes</button>
+			  <button onclick="window.location.href='facturas.html'">Facturas</button>
+			  <button onclick="window.location.href='cobradores.html'">Cobradores</button>
+			  <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
+			</div>
+			<div class="logout-container">
+			  <a href="#" id="logout-link">Cerrar sesión</a>
+			</div>
+		  </div>
     <hr size="4px" color="#008080"/>
     <h1 class="center">Clientes</h1>
     <p><div class="right"><button id="add-client-button" onclick="showModal()">Agregar cliente</button></div></p>
@@ -68,6 +72,8 @@
         </form>
       </div>
     </div>
+    <script src="../js/global.js"></script>
+    <script src="../js/clientes.js"></script>
     <script>
       window.onload = (event) =>{
 
