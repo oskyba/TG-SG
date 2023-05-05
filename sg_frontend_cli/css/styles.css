@@ -1,3 +1,33 @@
+.menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.buttons-container button {
+  margin-right: 10px;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.logout-container a {
+  margin-right: 10px;
+}
+
+
+
 /* Estilo de la página principal */
 body {
     background-color: #f0f8ff; /* Azul pastel */
@@ -392,10 +422,23 @@ table {
 
 .centerMenu {
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* Cambia esto de 'center' a 'space-between' */
   align-items: center;
   height: 30px;
   margin-top: 10px;
+}
+
+.rightMenu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 30px;
+  margin-top: 10px;
+  flex: 1; /* Ocupa todo el espacio disponible */
+}
+
+.rightMenu a {
+  margin-right: 10px; /* Agrega un poco de margen entre el texto y el borde derecho de .rightMenu */
 }
 
 .right {
