@@ -61,11 +61,24 @@ function cargarFacturas()
                 dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié;', 'Juv', 'Vie', 'Sáb'],
                 dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
                 weekHeader: 'Sm',
-                dateFormat: 'dd/mm/yy',
-                firstDay: 1,
+                dateFormat: 'yy/mm/dd',
+                firstDay: 1,    
                 forceParse: false,
                 isRTL: false,
+                defaultDate: new Date(),
+                setDate: new Date(),
+                nextText: 'Siguiente',
+                prevText: 'Anterior',
                 showMonthAfterYear: false,
+                beforeShowDay: function(date) {
+                    const today = new Date();
+                    if (date.getDate() === today.getDate() && 
+                        date.getMonth() === today.getMonth() && 
+                        date.getFullYear() === today.getFullYear()) {
+                      return [true, 'today', 'Hoy'];
+                    }
+                    return [true, '', ''];
+                  },
                 onClose: function(dateText, inst) {
                     const $date = $(this).parent().find('.date');
                     const previousDate = $date.text().trim();
@@ -80,7 +93,6 @@ function cargarFacturas()
                     }
                   }
                 });
-    
                 $('.date').click(function() {
                     $(this).parent().find('.datepicker-input').datepicker("show");
                 }); 
