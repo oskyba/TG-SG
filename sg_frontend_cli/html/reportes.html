@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Reportes</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  </head>
+  <body>
+    <hr size="4px" color="#008080"/>
+    <div class="menu-container">
+			<div class="buttons-container">
+			  <button onclick="window.location.href='clientes.html'">Clientes</button>
+			  <button onclick="window.location.href='facturas.html'">Facturas</button>
+			  <button onclick="window.location.href='cobradores.html'">Cobradores</button>
+			  <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
+              <button onclick="window.location.href='reportes.html'">Reportes</button>
+			</div>
+			<div class="logout-container">
+			  <a href="#" id="logout-link">Cerrar sesión</a>
+			</div>
+	</div>
+    <hr size="4px" color="#008080"/>
+    <h1 class="center">Reportes</h1>
+    <p></p>
+    <p></p>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div style="width: 33.33%;">
+        <select id="select-campo">
+          <option selected="true" disabled="disabled">Seleccione el reporte</option>
+          <option value="fechaEmision">Fecha de emisión</option>
+          <option value="fechaVencimiento">Fecha de vencimiento</option>
+          <option value="fechaCobro">Fecha de cobro</option>
+          <option value="estado">Estado de facturas</option>
+          <option value="contactadoPor">Contactabilidad</option>
+          <option value="cobradorAsignado">Cobradores asignados</option>
+        </select>
+      </div>
+
+      <div style="width: 33.33%;">
+        <select id="select-estado">
+          <option selected="true" disabled="disabled">Seleccione el estado de las facturas</option>
+          <option value="Cobrado">Cobrado</option>
+          <option value="A coordinar">A coordinar</option>
+          <option value="Coordinado">Coordinado</option>
+          <option value="Todos">Todos</option>
+        </select>
+      </div>
+
+      <div></div>
+        <button onclick="generarReporte(document.getElementById('select-campo').value, document.getElementById('select-estado').value)">Generar reporte</button>
+      </div>
+    </div>
+    <div id="reporte"></div>
+    <script src="../js/global.js"></script>
+    <script src="../js/reportes.js"></script>
+  </body>
+</html>

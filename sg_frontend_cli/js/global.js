@@ -1,8 +1,21 @@
+const token = localStorage.getItem('authToken');
+
+console.log(token);
+if (!token) {
+  window.location.href = 'sinPermisos.html';
+}
+
+$(window).unload(function(){
+    localStorage.removeItem("authToken"); 
+    localStorage.removeItem("username"); 
+    sessionStorage.clear(); 
+});
+
 const logoutLink = document.getElementById("logout-link");
 
 logoutLink.addEventListener("click", (event) => {
   event.preventDefault(); 
-  localStorage.removeItem("token"); 
+  localStorage.removeItem("authToken"); 
   localStorage.removeItem("username"); 
   sessionStorage.clear(); 
   window.location.href = "login.html";
