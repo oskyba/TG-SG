@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SG_Backend_api.Engines;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,6 +21,7 @@ namespace SG_Backend_api
     {
         public Startup(IConfiguration configuration)
         {
+            Log.Information("Configurando los servicios...");
             Configuration = configuration;
         }
 
@@ -28,6 +30,7 @@ namespace SG_Backend_api
         // Este método es llamado por el tiempo de ejecución. Use este método para agregar servicios al contenedor.
         public void ConfigureServices(IServiceCollection services)
         {
+
             // CORS - Esto habilita todo, puede que no sea lo necesario, evalúar en futuro
             services.AddCors(options =>
             {
@@ -125,13 +128,14 @@ namespace SG_Backend_api
         // Este método es llamado en tiempo de ejecución. Es para configurar la canalización de solicitudes HTTP.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            Log.Information("Configurando solicitudes http...");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SG_Backend_api v1"));
+ 
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SG_Backend_api v1"));
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -145,3 +149,4 @@ namespace SG_Backend_api
         }
     }
 }
+>>>>>>> Stashed changes

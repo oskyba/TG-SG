@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
+using Serilog;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace SG_Backend_api.Engines
 
         public DBEngine(IConfiguration configuration)
         {
+            Log.Information("Preparando la conexion a la BD...");
             _connectionString = configuration.GetConnectionString("DBConnection");
         }
 

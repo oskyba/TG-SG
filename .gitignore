@@ -9,3 +9,14 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+/.vs
+/sg_frontend_cli
+/sg_backend_api/.vs
+/sg_backend_api/bin
+/sg_backend_api/obj
+/sg_backend_api/Properties/PublishProfiles
+/sg_backend_api/_appsettings.json
+/database/SG_TELPOP Database - crear objectos Ant.sql
+/documentos/Implementación_ CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411/SQLEXPRADV_x64_ESN.exe
+/documentos/Implementación_ CreateVm-MicrosoftWindowsServer.WindowsServer-201-20230411194411
+/database/SG_TELPOP Database - crear objectos.sql

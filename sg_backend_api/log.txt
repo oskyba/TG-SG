@@ -1,0 +1,29 @@
+{"Timestamp":"2023-05-07T14:43:14.5681258-03:00","Level":"Information","MessageTemplate":"Iniciando el Servidor API Backend"}
+{"Timestamp":"2023-05-07T14:43:35.6807697-03:00","Level":"Information","MessageTemplate":"Finalizando servidor API Backend..."}
+{"Timestamp":"2023-05-07T14:47:13.9165073-03:00","Level":"Information","MessageTemplate":"Iniciando el Servidor API Backend"}
+{"Timestamp":"2023-05-07T14:47:16.7889903-03:00","Level":"Information","MessageTemplate":"Configurando los servicios..."}
+{"Timestamp":"2023-05-07T14:48:08.9241596-03:00","Level":"Information","MessageTemplate":"Finalizando servidor API Backend..."}
+{"Timestamp":"2023-05-07T17:56:08.1055750-03:00","Level":"Information","MessageTemplate":"Iniciando el Servidor API Backend"}
+{"Timestamp":"2023-05-07T17:56:52.4542796-03:00","Level":"Information","MessageTemplate":"Configurando los servicios..."}
+{"Timestamp":"2023-05-07T17:58:24.5368204-03:00","Level":"Information","MessageTemplate":"Finalizando servidor API Backend..."}
+{"Timestamp":"2023-05-07T19:29:32.3498687-03:00","Level":"Information","MessageTemplate":"Iniciando el Servidor API Backend"}
+{"Timestamp":"2023-05-07T19:29:33.7230786-03:00","Level":"Information","MessageTemplate":"Configurando los servicios..."}
+{"Timestamp":"2023-05-07T19:29:39.3504339-03:00","Level":"Information","MessageTemplate":"Configurando solicitudes http..."}
+{"Timestamp":"2023-05-08T06:06:02.5142346-03:00","Level":"Information","MessageTemplate":"Finalizando servidor API Backend..."}
+{"Timestamp":"2023-05-08T06:30:50.8999656-03:00","Level":"Information","MessageTemplate":"Iniciando el Servidor API Backend"}
+{"Timestamp":"2023-05-08T06:30:51.9718915-03:00","Level":"Information","MessageTemplate":"Configurando los servicios..."}
+{"Timestamp":"2023-05-08T06:30:53.7913636-03:00","Level":"Information","MessageTemplate":"Configurando solicitudes http..."}
+{"Timestamp":"2023-05-08T06:31:43.9755965-03:00","Level":"Information","MessageTemplate":"Preparando la conexion a la BD..."}
+{"Timestamp":"2023-05-08T06:31:44.2602431-03:00","Level":"Information","MessageTemplate":"Preparando el ingreso del usuario string"}
+{"Timestamp":"2023-05-08T06:36:17.0543650-03:00","Level":"Information","MessageTemplate":"Finalizando servidor API Backend..."}
+{"Timestamp":"2023-05-08T07:08:22.3369385-03:00","Level":"Information","MessageTemplate":"Iniciando el Servidor API Backend"}
+{"Timestamp":"2023-05-08T07:08:23.4259827-03:00","Level":"Information","MessageTemplate":"Configurando los servicios..."}
+{"Timestamp":"2023-05-08T07:08:24.1981183-03:00","Level":"Information","MessageTemplate":"Configurando solicitudes http..."}
+{"Timestamp":"2023-05-08T07:08:28.1431585-03:00","Level":"Information","MessageTemplate":"Finalizando servidor API Backend..."}
+{"Timestamp":"2023-05-08T22:06:41.5866383-03:00","Level":"Information","MessageTemplate":"Iniciando el Servidor API Backend"}
+{"Timestamp":"2023-05-08T22:06:43.6240048-03:00","Level":"Information","MessageTemplate":"Configurando los servicios..."}
+{"Timestamp":"2023-05-08T22:06:46.2857406-03:00","Level":"Information","MessageTemplate":"Configurando solicitudes http..."}
+{"Timestamp":"2023-05-08T22:08:50.0702702-03:00","Level":"Information","MessageTemplate":"Preparando la conexion a la BD..."}
+{"Timestamp":"2023-05-08T22:08:50.4204714-03:00","Level":"Information","MessageTemplate":"Preparando el ingreso del usuario string"}
+{"Timestamp":"2023-05-08T22:14:05.9403288-03:00","Level":"Information","MessageTemplate":"Preparando la conexion a la BD..."}
+{"Timestamp":"2023-05-08T22:14:16.5425433-03:00","Level":"Information","MessageTemplate":"Preparando la conexion a la BD..."}
