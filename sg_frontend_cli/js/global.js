@@ -1,6 +1,5 @@
 const token = localStorage.getItem('authToken');
 
-console.log(token);
 if (!token) {
   window.location.href = 'sinPermisos.html';
 }
