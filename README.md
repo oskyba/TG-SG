@@ -10,6 +10,7 @@ Herramientas:
 C# REST API utilizando autenticación basica JWT para los usuarios,
 Framework Dapper para SQL Server.
 Newtonsoft JSON para la serializacion de mensajes,
+traceo de logs con formato Elastic mediante Serilog,
 Documentacion APIs con Swagger y Docker-ready.
 
 URL acceso : 
