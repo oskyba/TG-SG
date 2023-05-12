@@ -5,10 +5,18 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using SG_Backend_api.Common;
+<<<<<<< HEAD
 
 namespace SG_Backend_api.Controllers
 {
     [Authorize]
+=======
+using Serilog;
+
+namespace SG_Backend_api.Controllers
+{
+    //[Authorize]
+>>>>>>> confirmacion de cambios
     [Route("api/[controller]")]
     [ApiController]
     public class ClientesController : ControllerBase
@@ -28,6 +36,10 @@ namespace SG_Backend_api.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
+<<<<<<< HEAD
+=======
+            Log.Information("Listando todos los clientes de la BD.");
+>>>>>>> confirmacion de cambios
             return Ok(await db.JsonArray("SELECT * FROM telpop.Clientes"));
         }
 
@@ -59,6 +71,7 @@ namespace SG_Backend_api.Controllers
             return Ok(await db.Value<int>("INSERT INTO telpop.clientes (nombre, telefono, direccion, email) VALUES (@nombre, telefono, direccion, @email); SELECT SCOPE_IDENTITY()", new { body.nombre}));
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Modifica datos segun el (id) del Cliente.
         /// </summary>
@@ -75,6 +88,8 @@ namespace SG_Backend_api.Controllers
             else
                 return Unauthorized();
         }
+=======
+>>>>>>> confirmacion de cambios
 
         /// <summary>
         /// Borra el cliente identificada por su (id) .

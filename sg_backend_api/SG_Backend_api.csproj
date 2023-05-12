@@ -7,7 +7,14 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <FileVersion>1.01.0511.1955</FileVersion>
+    <AssemblyVersion>1.01.0511.1955</AssemblyVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\ProductosController.cs" />
+    <Compile Remove="Controllers\ServiciosController.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CryptoHelper" Version="3.0.2" />

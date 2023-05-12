@@ -12,7 +12,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using SG_Backend_api.Common;
+<<<<<<< HEAD
 using static System.Runtime.InteropServices.JavaScript.JSType;
+=======
+>>>>>>> confirmacion de cambios
 using Serilog;
 
 namespace SG_Backend_api.Controllers
@@ -40,7 +43,11 @@ namespace SG_Backend_api.Controllers
         {
             string username = body.Usuario.ToLower();
             Log.Information($"Preparando el ingreso del usuario {username}");
+<<<<<<< HEAD
             string hash = await db.Value<string>("SELECT hash FROM sistema.users WHERE LOWER(aliasUsr)=@username", new { username });
+=======
+            string hash = await db.Value<string>("SELECT hash FROM sistema.users WHERE LOWER(aliasUsr)=@username and estado<>0", new { username });
+>>>>>>> confirmacion de cambios
             Log.Information("Verificando la respuesta del servicio..."); ;
             if (!string.IsNullOrEmpty(hash) && crypto.HashCheck(hash, body.Contraseña))
             {
@@ -61,17 +68,45 @@ namespace SG_Backend_api.Controllers
         {
             string username = body.Usuario.ToLower();
             string email = body.Email.ToLower();
+<<<<<<< HEAD
 
+=======
+            Log.Information($"Registrando un nuevo usuario {username}");
+>>>>>>> confirmacion de cambios
             if (await db.Value<int>("SELECT COUNT(*) FROM sistema.Users, telpop.usuarios WHERE LOWER(aliasUsr)=@username OR LOWER(email)=@email", new { username, email }) > 0)
                 return Unauthorized("error.unavailable");
             var parameters = new { body.Nombre, body.Apellido, email, body.Telefono };
             await db.Execute("INSERT INTO telpop.Usuarios (nombre, apellido, email, telefono) VALUES (@nombre, @apellido, @email, @telefono)", parameters );
             int id = await db.Value<int>("SELECT id FROM telpop.Usuarios WHERE LOWER(email)=@email", new { email });
             await db.Execute("INSERT INTO sistema.Users (aliasUsr, hash, id_usuario) VALUES (@username, @hash, @id )", new { username, hash = crypto.Hash(body.Contraseña), id });
+<<<<<<< HEAD
 
+=======
+            Log.Information("Usuario registrado correctamente.");
+>>>>>>> confirmacion de cambios
             return Ok();
         }
+        /// <summary>
+        /// Habilita el usuario para utilizar el sistema.
+        /// </summary>
+        /// PUT api/Clientes/{id}
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Autorize(int id, [FromBody] ClienteBody body)
+        {
+            
+            string email = body.email.ToLower();
+            Log.Information($"Autorizando el ingreso a la paltaforma para el mail registrado {email}");
+            int found = await db.Value<int>("SELECT COUNT(*) FROM sistema.Users, telpop.usuarios WHERE estado=0 or id=@id OR LOWER(email)=@email;UPDATE sistema.Users SET estado=1 WHERE ID_USUARIO=@id", new { email, id });
 
+            if (found > 0)
+            {
+                Log.Information("Usuario autorizado.");
+                return Ok($"El cliente: {id} esta habilitado en el sisitema");
+            }
+            else
+                return Unauthorized();
+ 
+        }
         /// <summary>
         /// Devuelve los datos de sesión para este usuario..
         /// </summary>
