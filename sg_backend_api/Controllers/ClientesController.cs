@@ -5,18 +5,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using SG_Backend_api.Common;
-<<<<<<< HEAD
-
-namespace SG_Backend_api.Controllers
-{
-    [Authorize]
-=======
 using Serilog;
 
 namespace SG_Backend_api.Controllers
 {
+
     //[Authorize]
->>>>>>> confirmacion de cambios
     [Route("api/[controller]")]
     [ApiController]
     public class ClientesController : ControllerBase
@@ -36,10 +30,9 @@ namespace SG_Backend_api.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-<<<<<<< HEAD
-=======
+
             Log.Information("Listando todos los clientes de la BD.");
->>>>>>> confirmacion de cambios
+
             return Ok(await db.JsonArray("SELECT * FROM telpop.Clientes"));
         }
 
@@ -71,7 +64,6 @@ namespace SG_Backend_api.Controllers
             return Ok(await db.Value<int>("INSERT INTO telpop.clientes (nombre, telefono, direccion, email) VALUES (@nombre, telefono, direccion, @email); SELECT SCOPE_IDENTITY()", new { body.nombre}));
         }
 
-<<<<<<< HEAD
         /// <summary>
         /// Modifica datos segun el (id) del Cliente.
         /// </summary>
@@ -79,17 +71,16 @@ namespace SG_Backend_api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] DatosBody body)
         {
-            //string cdSrv = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string idC = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            int found = await db.Value<int>("SELECT COUNT(*) FROM telpop.clientes WHERE ID=@id AND CodCliente=@cdSrv;UPDATE telpop.clientes SET text=@text WHERE ID=@id AND CodCliente=@cdSrv", new { body.Text, id, cdSrv });
+            int found = await db.Value<int>("SELECT COUNT(*) FROM telpop.clientes WHERE ID=@id AND CodCliente=@cdSrv;UPDATE telpop.clientes SET text=@text WHERE ID=@id AND CodCliente=@cdSrv", new { body.Text, id, idC });
 
             if (found > 0)
                 return Ok($"El cliente: {id} modificado exitosamente");
             else
                 return Unauthorized();
         }
-=======
->>>>>>> confirmacion de cambios
+
 
         /// <summary>
         /// Borra el cliente identificada por su (id) .

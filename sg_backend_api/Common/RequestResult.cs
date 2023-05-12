@@ -59,8 +59,6 @@ namespace SG_Backend_api.Common
 		public string direccion { get; set; }
 		public string email { get; set; }
 	}
-<<<<<<< HEAD
-=======
     public class UsuarioBody
     {
         public string nombre { get; set; }
@@ -68,7 +66,7 @@ namespace SG_Backend_api.Common
         public string apellido { get; set; }
         public string usuario { get; set; }
     }
->>>>>>> confirmacion de cambios
+
     public enum RequestState
     {
         Failed = -1,

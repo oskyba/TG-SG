@@ -30,11 +30,8 @@ namespace SG_Backend_api
         // Este método es llamado por el tiempo de ejecución. Use este método para agregar servicios al contenedor.
         public void ConfigureServices(IServiceCollection services)
         {
-<<<<<<< HEAD
-
-=======
             Log.Information("Inyectando metodos...");
->>>>>>> confirmacion de cambios
+
             // CORS - Esto habilita todo, puede que no sea lo necesario, evalúar en futuro
             services.AddCors(options =>
             {
@@ -153,9 +150,4 @@ namespace SG_Backend_api
             Log.Information("Servidor listo.");
         }
     }
-<<<<<<< HEAD
 }
->>>>>>> Stashed changes
-=======
-}
->>>>>>> confirmacion de cambios

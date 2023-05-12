@@ -2,10 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using Serilog;
-<<<<<<< HEAD
-=======
 using System;
->>>>>>> confirmacion de cambios
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
