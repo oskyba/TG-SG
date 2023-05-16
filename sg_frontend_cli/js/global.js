@@ -1,12 +1,12 @@
-const token = localStorage.getItem('authToken');
+const tokenLogin = localStorage.getItem('authToken');
 
-if (!token) {
+if (!tokenLogin) {
   window.location.href = 'sinPermisos.html';
 }
 
-window.addEventListener('beforeunload', function() {
+/*window.addEventListener('unload', function() {
   localStorage.clear();
-});
+});*/ 
 
 const logoutLink = document.getElementById("logout-link");
 
@@ -34,4 +34,13 @@ function cargarFeedbackSystem() {
     var x = document.getElementById("snackbarSystem");
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function seleccionarOpcion(listaEstado, valorSeleccionado) {
+  for (let i = 0; i < listaEstado.options.length; i++) {
+    if (listaEstado.options[i].value === valorSeleccionado) {
+      listaEstado.selectedIndex = i;
+      break;
+    }
+  }
 }

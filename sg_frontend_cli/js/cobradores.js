@@ -1,5 +1,13 @@
 let clienteDireccion;
 
+const funcionUsr = localStorage.getItem('funcion');
+
+if (funcionUsr != "Cobranza" || funcionUsr != "Administrador") {
+    window.location.href = 'sinPermisos.html';
+} else {
+    cargarCobradores();
+}
+
 function limpiarTabla() 
 {
     const tbody = document.querySelector("tbody");

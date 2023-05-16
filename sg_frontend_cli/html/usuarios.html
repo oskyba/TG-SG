@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  </head>
+  <body>
+    <hr size="4px" color="#008080"/>
+    <div class="menu-container">
+			<div class="buttons-container">
+			  <button onclick="window.location.href='clientes.html'">Clientes</button>
+			  <button onclick="window.location.href='facturas.html'">Facturas</button>
+			  <button onclick="window.location.href='cobradores.html'">Cobradores</button>
+			  <button onclick="window.location.href='contactabilidad.html'">Contactabilidad</button>
+        <button onclick="window.location.href='reportes.html'">Reportes</button>
+        <button onclick="window.location.href='usuarios.html'">Reportes</button>
+			</div>
+			<div class="logout-container">
+			  <a href="#" id="logout-link">Cerrar sesión</a>
+			</div>
+		</div>
+    <hr size="4px" color="#008080"/>
+    <h1 class="center">Usuarios</h1>
+
+    <input type="text" id="search-users" placeholder="Buscar..." onkeyup="doSearch()" />
+    <table id="users-table">
+      <thead>
+        <tr>
+          <th>ID Usuario</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo Electrónico</th>
+          <th>Teléfono</th>
+          <th>Función</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="users-list">
+      </tbody>
+    </table>
+
+    <div id="snackbar">Usuario actualizado con éxito</div>
+    <div id="snackbarError">Hubo un problema al actualizar el registro</div>
+    <div id="snackbarSystem">Hubo un problema al recuperar los registros</div>
+    
+    <script src="../js/global.js"></script>
+    <script src="../js/clientes.js"></script>
+    <script>
+      window.onload = (event) =>{
+
+        cargarUsuarios();
+
+      };
+    </script>
+  </body>
+</html>

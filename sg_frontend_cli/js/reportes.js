@@ -1,3 +1,9 @@
+const funcionUsr = localStorage.getItem('funcion');
+
+if (funcionUsr != "Gerencia" || funcionUsr != "Administrador") {
+  window.location.href = 'sinPermisos.html';
+} 
+
 async function generarReporte(variableReporte, estado) {
     const facturas = await fetch("https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas")
       .then(response => response.json())

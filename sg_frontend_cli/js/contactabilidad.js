@@ -1,6 +1,14 @@
 let clienteCorreo;
 let clienteTelefono;
 
+const funcionUsr = localStorage.getItem('funcion');
+
+if (funcionUsr != "Cobranza" || funcionUsr != "Administrador") {
+    window.location.href = 'sinPermisos.html';
+} else {
+    cargarContactabilidad();
+}
+
 function doSearch()
         {
             const tableReg = document.getElementById('contactabilidad-table');

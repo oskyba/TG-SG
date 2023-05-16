@@ -17,8 +17,11 @@ CREATE TABLE telpop.usuarios (
  contraseña VARBINARY(8000) NOT NULL,
  nombre VARCHAR(30) NOT NULL,
  apellido VARCHAR(30) NOT NULL,
- telefono VARCHAR(15) NOT NULL
-)
+ email VARCHAR(50) NOT NULL,
+ telefono VARCHAR(15) NOT NULL,
+ funcion VARCHAR(14) NOT NULL,
+ estado VARCHAR(145 NOT NULL
+);
 
 CREATE TABLE telpop.clientes (
 	id INT PRIMARY KEY,
