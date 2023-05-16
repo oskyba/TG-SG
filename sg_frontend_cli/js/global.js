@@ -4,10 +4,8 @@ if (!token) {
   window.location.href = 'sinPermisos.html';
 }
 
-$(window).unload(function(){
-    localStorage.removeItem("authToken"); 
-    localStorage.removeItem("username"); 
-    sessionStorage.clear(); 
+window.addEventListener('beforeunload', function() {
+  localStorage.clear();
 });
 
 const logoutLink = document.getElementById("logout-link");
