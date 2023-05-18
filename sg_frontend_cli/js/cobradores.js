@@ -2,7 +2,7 @@ let clienteDireccion;
 
 const funcionUsr = sessionStorage.getItem('funcion');
 
-if (funcionUsr != "Cobranza" || funcionUsr != "Administrador") {
+if (funcionUsr !== "Cobranza" || funcionUsr !== "Administrador") {
     window.location.href = 'sinPermisos.html';
 } else {
     cargarCobradores();

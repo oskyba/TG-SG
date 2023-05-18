@@ -1,6 +1,6 @@
 const funcionUsr = sessionStorage.getItem('funcion');
 
-if (funcionUsr != "Administración" || funcionUsr != "Administrador") {
+if (funcionUsr !== "Administración" || funcionUsr !== "Administrador") {
     window.location.href = 'sinPermisos.html';
 } else {
     cargarClientes();
