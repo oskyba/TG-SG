@@ -8,7 +8,7 @@ using SG_Backend_api.Common;
 
 namespace SG_Backend_api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FacturasController : ControllerBase
@@ -54,7 +54,7 @@ namespace SG_Backend_api.Controllers
         {
             //string user = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            return Ok(await db.Value<int>("INSERT INTO telpop.Facturas (descripcion, fecha, CodProvincia) VALUES (@text, GETDATE(), @user); SELECT SCOPE_IDENTITY()", new { body.Text }));
+            return Ok(await db.Value<int>("INSERT INTO telpop.Facturas (descripcion, fecha, CodProvincia) VALUES (@text, GETDATE(), @user); SELECT SCOPE_IDENTITY()", new { body.Nombre }));
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace SG_Backend_api.Controllers
         {
             string cdProv = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            int found = await db.Value<int>("SELECT COUNT(*) FROM telpop.Facturas WHERE ID=@id AND CodProvincia=@cdProv;UPDATE telpop.Facturas SET text=@text WHERE ID=@id AND CodProvincia=@cdProv", new { body.Text, id, cdProv });
+            int found = await db.Value<int>("SELECT COUNT(*) FROM telpop.Facturas WHERE ID=@id AND CodProvincia=@cdProv;UPDATE telpop.Facturas SET text=@text WHERE ID=@id AND CodProvincia=@cdProv", new { body.Nombre, id, cdProv });
 
             if (found > 0)
                 return Ok($"Factura: {id} modificada exitosamente");

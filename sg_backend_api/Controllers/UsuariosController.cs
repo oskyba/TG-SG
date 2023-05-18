@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using SG_Backend_api.Common;
 using Serilog;
+using Microsoft.AspNetCore.Mvc.Filters;
+using System.Text.Json;
+using System.Reflection;
+using System;
+using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
+using Dapper;
+using System.Linq;
 
 namespace SG_Backend_api.Controllers
 {
@@ -48,11 +56,29 @@ namespace SG_Backend_api.Controllers
         /// </summary>
         // PUT api/Usuarios/{id}
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] DatosBody body)
+        public async Task<ActionResult> Put(int id, [FromBody] UsuarioBody body)
         {
             string idC = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string setext = "";
+            
+            Type tipoClase = body.GetType(); // Obtener el tipo de la clase DatosBody
+            PropertyInfo[] propiedades = tipoClase.GetProperties(); // Obtener todas las propiedades de la clase
+            
+            //Manejamos los parametros de las sentencias dinamicamente
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", id);
 
-            int found = await db.Value<int>("SELECT COUNT(*) FROM telpop.Usuarios WHERE ID=@id AND CodUsuario=@cdSrv;UPDATE telpop.Usuarios SET text=@text WHERE ID=@id AND CodUsuario=@cdSrv", new { body.Text, id, idC });
+            foreach (PropertyInfo propiedad in propiedades)
+            {
+                string nombrePropiedad = propiedad.Name; // Obtener el nombre de la propiedad
+                object valorPropiedad = propiedad.GetValue(body); // Obtener el valor de la propiedad
+                
+                // Armamos la bateria de SETs y parametros...
+                setext = setext + (setext.IsNullOrEmpty() ? " " : ", ") + nombrePropiedad + "=@" + nombrePropiedad;
+                parameters.Add("@" + nombrePropiedad, valorPropiedad.ToString());
+            }
+
+            int found = await db.Value<int>("SELECT COUNT(*) FROM telpop.Usuarios WHERE ID=@id;UPDATE telpop.Usuarios SET"+ setext+" WHERE ID=@id ", parameters);
 
             if (found > 0)
                 return Ok($"El Usuario: {id} modificado exitosamente");

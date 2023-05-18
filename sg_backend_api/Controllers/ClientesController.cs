@@ -73,7 +73,7 @@ namespace SG_Backend_api.Controllers
         {
             string idC = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            int found = await db.Value<int>("SELECT COUNT(*) FROM telpop.clientes WHERE ID=@id AND CodCliente=@cdSrv;UPDATE telpop.clientes SET text=@text WHERE ID=@id AND CodCliente=@cdSrv", new { body.Text, id, idC });
+            int found = await db.Value<int>("SELECT COUNT(*) FROM telpop.clientes WHERE ID=@id AND CodCliente=@cdSrv;UPDATE telpop.clientes SET text=@text WHERE ID=@id AND CodCliente=@cdSrv", new { body.Nombre, id, idC });
 
             if (found > 0)
                 return Ok($"El cliente: {id} modificado exitosamente");

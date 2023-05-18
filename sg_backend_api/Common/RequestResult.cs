@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SG_Backend_api.Common
 {
@@ -25,8 +26,9 @@ namespace SG_Backend_api.Common
     }
     public class DatosBody
     {
-        [Required]
-        public string Text { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Telefono { get; set; }
     }
     public class RegisterBody
     {
