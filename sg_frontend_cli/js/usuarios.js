@@ -1,6 +1,6 @@
 const funcionUsr = sessionStorage.getItem('funcion');
 
-if (funcionUsr != "Gerencia" || funcionUsr != "Administrador") {
+if (funcionUsr !== "Gerencia" || funcionUsr !== "Administrador") {
     window.location.href = 'sinPermisos.html';
 } else {
     cargarUsuarios();
@@ -56,7 +56,9 @@ function doSearch()
             const tabla = document.getElementById('users-table');
             const tbody = tabla.querySelector('tbody');
             data.forEach(async usuario => {
+                if (usuario.usuario !== "Administrador") {
                     let celdaEstado;
+
                     if (usuario.estado === "null" || usuario.estado === null || usuario.estado === "Deshabilitado") {
                         celdaEstado = '<button class="btn btn-secondary btn-sm" onclick="habilitarUsuario(this)">Habilitar</button>';
                     } else {
@@ -99,6 +101,7 @@ function doSearch()
                           });
                         }
                         });
+                    }
                 });
               })
               .catch(error => console.error(error));
