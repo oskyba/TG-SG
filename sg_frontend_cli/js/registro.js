@@ -1,5 +1,5 @@
 const registerForm = document.getElementById('register-form');
-const apiUrl = 'https://dummyjson.com/auth/register';
+const apiUrl = 'http://20.226.114.247:8080/api/Auth/Register';
 
 registerForm.addEventListener('submit', async event => {
   event.preventDefault();

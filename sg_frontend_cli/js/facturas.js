@@ -1,3 +1,11 @@
+const funcionUsr = sessionStorage.getItem('funcion');
+
+if (funcionUsr != "Administración" || funcionUsr != "Administrador") {
+    window.location.href = 'sinPermisos.html';
+} else {
+    cargarFacturas();
+}
+
 function limpiarTabla() 
 {
     const tbody = document.querySelector("tbody");
@@ -268,11 +276,3 @@ function closeModal()
     modal.style.display = "none";
 }
 
-function seleccionarOpcion(listaEstado, valorSeleccionado) {
-    for (let i = 0; i < listaEstado.options.length; i++) {
-      if (listaEstado.options[i].value === valorSeleccionado) {
-        listaEstado.selectedIndex = i;
-        break;
-      }
-    }
-  }

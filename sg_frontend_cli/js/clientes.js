@@ -1,3 +1,11 @@
+const funcionUsr = sessionStorage.getItem('funcion');
+
+if (funcionUsr != "Administración" || funcionUsr != "Administrador") {
+    window.location.href = 'sinPermisos.html';
+} else {
+    cargarClientes();
+}
+
 function limpiarTabla() {
     const tbody = document.querySelector("tbody");
     tbody.innerHTML = "";

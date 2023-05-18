@@ -1,13 +1,13 @@
 const loginForm = document.getElementById('login-form');
-const apiUrl = 'https://dummyjson.com/auth/login';
+const apiUrl = 'http://20.226.114.247:8080/api/Auth/Login';
 
 loginForm.addEventListener('submit', async event => {
   event.preventDefault();
 
   const formData = new FormData(loginForm);
   const requestBody = {
-    username: formData.get('username'),
-    password: formData.get('password')
+    usuario: formData.get('username'),
+    contraseña: formData.get('password')
   };
 
   try {
@@ -22,8 +22,11 @@ loginForm.addEventListener('submit', async event => {
     if (response.ok) {
       const responseBody = await response.json();
       const authToken = responseBody.token;
-      localStorage.setItem('authToken', authToken);
-      localStorage.setItem('username', username);
+      const username = responseBody.aliasUsr;
+      const funcion = responseBody.funcion;
+      sessionStorage.setItem('authToken', authToken);
+      sessionStorage.setItem('username', username);
+      sessionStorage.setItem('funcion', funcion);
       window.location.href = "dashboard.html";
     } else {
         cargarFeedbackError(); 

@@ -1,13 +1,14 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Cobradores</title>
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <meta charset="utf-8">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="../css/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
     <hr size="4px" color="#008080"/>
-		<div class="menu-container">
+    <div class="menu-container">
 			<div class="buttons-container">
 			  <button onclick="window.location.href='clientes.html'">Clientes</button>
 			  <button onclick="window.location.href='facturas.html'">Facturas</button>
@@ -19,41 +20,40 @@
 			<div class="logout-container">
 			  <a href="#" id="logout-link">Cerrar sesión</a>
 			</div>
-		  </div>
-      <hr size="4px" color="#008080"/>
-    <h1 class="center">Cobradores</h1>
-    <input type="text" id="search-cobradores" placeholder="Buscar..." onkeyup="doSearch()" />
-    <table id="cobradores-table">
+		</div>
+    <hr size="4px" color="#008080"/>
+    <h1 class="center">Usuarios</h1>
+
+    <input type="text" id="search-users" placeholder="Buscar..." onkeyup="doSearch()" />
+    <table id="users-table">
       <thead>
         <tr>
-          <th>ID Factura</th>
-          <th>ID Cliente</th>
-          <th>Dirección</th>
-          <th>Fecha</th>
-          <th>Número Factura</th>
-          <th>Importe</th>
+          <th>ID Usuario</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo Electrónico</th>
+          <th>Teléfono</th>
+          <th>Función</th>
           <th>Estado</th>
-          <th>Asignado a</th>
-          <th>Motivo recoordinación</th>
           <th>Acciones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="users-list">
       </tbody>
     </table>
-    <div id="snackbar">Registro actualizado con éxito</div>
+
+    <div id="snackbar">Usuario actualizado con éxito</div>
     <div id="snackbarError">Hubo un problema al actualizar el registro</div>
-    <div id="snackbarSystem">Hubo un problema al recuperar la información</div>
+    <div id="snackbarSystem">Hubo un problema al recuperar los usuarios</div>
+    
     <script src="../js/global.js"></script>
-    <script src="../js/cobradores.js"></script>
-    <script>	
+    <script src="../js/clientes.js"></script>
+    <script>
       window.onload = (event) =>{
-        cargarCobradores();
+
+        cargarUsuarios();
+
       };
-        </script>
+    </script>
   </body>
 </html>
-
-
-
-

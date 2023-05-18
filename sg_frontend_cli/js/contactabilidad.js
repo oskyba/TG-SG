@@ -1,6 +1,14 @@
 let clienteCorreo;
 let clienteTelefono;
 
+const funcionUsr = sessionStorage.getItem('funcion');
+
+if (funcionUsr != "Cobranza" || funcionUsr != "Administrador") {
+    window.location.href = 'sinPermisos.html';
+} else {
+    cargarContactabilidad();
+}
+
 function doSearch()
         {
             const tableReg = document.getElementById('contactabilidad-table');
@@ -146,7 +154,7 @@ function actualizarEstadoFactura(boton) {
     
     const fechaCobro = fila.querySelectorAll('td .datepicker-input')[0].value;
     const estado = "Coordinado";
-    const contactadoPor = localStorage.getItem('username');
+    const contactadoPor = sessionStorage.getItem('username');
 
     fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
         method: 'PUT',
