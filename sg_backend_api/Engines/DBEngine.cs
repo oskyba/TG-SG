@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
+using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -14,6 +16,7 @@ namespace SG_Backend_api.Engines
 
         public DBEngine(IConfiguration configuration)
         {
+            Log.Information("Preparando la conexion a la BD...");
             _connectionString = configuration.GetConnectionString("DBConnection");
         }
 
@@ -36,7 +39,7 @@ namespace SG_Backend_api.Engines
             {
                 return JObject.FromObject(await Value<dynamic>(query, parameters));
             }
-            catch { }
+            catch (Exception ex) { Log.Warning($"La ejecucion de la consulta a la BD a fallado, a continuacion la informacion correspondiente: {ex.Message}"); }
 
             return new JObject();
         }
@@ -47,7 +50,7 @@ namespace SG_Backend_api.Engines
             {
                 return JArray.FromObject(await Query<dynamic>(query, parameters));
             }
-            catch { }
+            catch (Exception ex) { Log.Warning($"La ejecucion de la consulta a la BD a fallado, a continuacion la informacion correspondiente: {ex.Message}"); }
 
             return new JArray();
         }

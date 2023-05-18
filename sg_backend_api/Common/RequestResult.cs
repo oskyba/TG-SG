@@ -28,6 +28,45 @@ namespace SG_Backend_api.Common
         [Required]
         public string Text { get; set; }
     }
+    public class RegisterBody
+    {
+        [Required]
+        public string Usuario { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string Contraseña { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+        [Required]
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Telefono { get; set; }
+    }
+    public class LoginBody
+    {
+        [Required]
+        public string Usuario { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Contraseña { get; set; }
+    }
+	public class ClienteBody
+    {
+		public string nombre { get; set; }
+		public string telefono { get; set; }
+		public string direccion { get; set; }
+		public string email { get; set; }
+	}
+    public class UsuarioBody
+    {
+        public string nombre { get; set; }
+        public string telefono { get; set; }
+        public string apellido { get; set; }
+        public string usuario { get; set; }
+    }
+
     public enum RequestState
     {
         Failed = -1,

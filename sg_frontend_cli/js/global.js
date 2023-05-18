@@ -1,5 +1,6 @@
 const tokenLogin = sessionStorage.getItem('authToken');
 
+
 if (!tokenLogin) {
   window.location.href = 'sinPermisos.html';
 }
