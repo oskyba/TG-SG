@@ -1,19 +1,13 @@
-const tokenLogin = localStorage.getItem('authToken');
+const tokenLogin = sessionStorage.getItem('authToken');
 
 if (!tokenLogin) {
   window.location.href = 'sinPermisos.html';
 }
 
-/*window.addEventListener('unload', function() {
-  localStorage.clear();
-});*/ 
-
 const logoutLink = document.getElementById("logout-link");
 
 logoutLink.addEventListener("click", (event) => {
   event.preventDefault(); 
-  localStorage.removeItem("authToken"); 
-  localStorage.removeItem("username"); 
   sessionStorage.clear(); 
   window.location.href = "login.html";
 });

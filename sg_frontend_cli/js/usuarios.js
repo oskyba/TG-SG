@@ -1,4 +1,4 @@
-const funcionUsr = localStorage.getItem('funcion');
+const funcionUsr = sessionStorage.getItem('funcion');
 
 if (funcionUsr != "Gerencia" || funcionUsr != "Administrador") {
     window.location.href = 'sinPermisos.html';
@@ -50,7 +50,7 @@ function doSearch()
     function cargarUsuarios() 
     { 
         limpiarTabla();
-        fetch('http://20.226.114.247:8080/api/Auth/')
+        fetch('http://20.226.114.247:8080/api/Usuarios/')
           .then(response => response.json())
           .then(data => {
             const tabla = document.getElementById('users-table');
@@ -117,7 +117,7 @@ function doSearch()
         const telefono = fila.querySelectorAll('td')[4].textContent;
         const funcion = fila.querySelector('select').value;
 
-        fetch(`http://20.226.114.247:8080/api/Auth/${id}`, {
+        fetch(`http://20.226.114.247:8080/api/Usuarios/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -176,7 +176,7 @@ function doSearch()
         const fila  = document.querySelectorAll('#users-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
 
-        fetch(`http://20.226.114.247:8080/api/Auth/${id}`, {
+        fetch(`http://20.226.114.247:8080/api/Usuarios/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,4 +1,4 @@
-const funcionUsr = localStorage.getItem('funcion');
+const funcionUsr = sessionStorage.getItem('funcion');
 
 if (funcionUsr != "Gerencia" || funcionUsr != "Administrador") {
   window.location.href = 'sinPermisos.html';

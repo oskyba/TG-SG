@@ -1,6 +1,6 @@
 let clienteDireccion;
 
-const funcionUsr = localStorage.getItem('funcion');
+const funcionUsr = sessionStorage.getItem('funcion');
 
 if (funcionUsr != "Cobranza" || funcionUsr != "Administrador") {
     window.location.href = 'sinPermisos.html';
@@ -171,7 +171,7 @@ function doSearch()
         var posicion = Array.from(preFila.parentNode.children).indexOf(preFila);
         const fila  = document.querySelectorAll('#cobradores-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
-        const cobradorAsignado = localStorage.getItem('username');
+        const cobradorAsignado = sessionStorage.getItem('username');
 
         fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
          method: 'PUT',

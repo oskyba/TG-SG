@@ -24,9 +24,9 @@ loginForm.addEventListener('submit', async event => {
       const authToken = responseBody.token;
       const username = responseBody.aliasUsr;
       const funcion = responseBody.funcion;
-      localStorage.setItem('authToken', authToken);
-      localStorage.setItem('username', username);
-      localStorage.setItem('funcion', funcion);
+      sessionStorage.setItem('authToken', authToken);
+      sessionStorage.setItem('username', username);
+      sessionStorage.setItem('funcion', funcion);
       window.location.href = "dashboard.html";
     } else {
         cargarFeedbackError(); 
