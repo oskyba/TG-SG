@@ -1,3 +1,5 @@
+toggleZoomScreen();
+
 const tokenLogin = sessionStorage.getItem('authToken');
 
 if (!tokenLogin) {
@@ -37,4 +39,8 @@ function seleccionarOpcion(listaEstado, valorSeleccionado) {
       break;
     }
   }
+}
+
+function toggleZoomScreen() {
+  document.body.style.zoom = "80%";
 }

@@ -15,7 +15,7 @@ function limpiarTabla()
 function cargarFacturas() 
 { 
         limpiarTabla();
-        fetch('https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas')
+        fetch('http://20.226.114.247:8080/api/Facturas')
           .then(response => response.json())
           .then(data => {
             const tabla = document.getElementById('facturas-table');
@@ -135,7 +135,7 @@ function agregarFactura()
     const cobradorAsignado = "";
     const comentarios      = "";
 
-    fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas`, {
+    fetch(`http://20.226.114.247:8080/api/Facturas`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -180,7 +180,7 @@ function modificarFactura(boton)
     const fechaVencimiento = fila.querySelectorAll('td .date')[1].textContent; 
     const fechaCobro = fila.querySelectorAll('td .date')[2].textContent; 
 
-    fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
+    fetch(`http://20.226.114.247:8080/api/Facturas/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -213,7 +213,7 @@ function eliminarFactura(boton)
     const fila  = document.querySelectorAll('#facturas-table tbody tr')[posicion];
     const id = fila.querySelectorAll('td')[0].textContent;
 
-    fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
+    fetch(`http://20.226.114.247:8080/api/Facturas/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -275,4 +275,3 @@ function closeModal()
     var modal = document.getElementById("modalFactura");
     modal.style.display = "none";
 }
-

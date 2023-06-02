@@ -49,7 +49,7 @@ function doSearch()
     function cargarUsuarios() 
     { 
         limpiarTabla();
-        fetch('http://20.226.114.247:8080/api/Usuarios/')
+        fetch('http://20.226.114.247:8080/api/Usuarios')
           .then(response => response.json())
           .then(data => {
             const tabla = document.getElementById('users-table');
@@ -58,7 +58,7 @@ function doSearch()
                 if (usuario.usuario !== "Administrador") {
                     let celdaEstado;
 
-                    if (usuario.estado === "null" || usuario.estado === null || usuario.estado === "Deshabilitado") {
+                    if (usuario.estado === "null" || usuario.estado === null || usuario.estado === "Deshabilitado" || usuario.estado === "estado 1") {
                         celdaEstado = '<button class="btn btn-secondary btn-sm" onclick="habilitarUsuario(this)">Habilitar</button>';
                     } else {
                         celdaEstado = `${usuario.estado}`;

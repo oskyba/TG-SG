@@ -52,7 +52,7 @@ function doSearch()
     function cargarCobradores() 
     { 
         limpiarTabla();
-        fetch('https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas')
+        fetch('http://20.226.114.247:8080/api/Facturas')
           .then(response => response.json())
           .then(data => {
             const tabla = document.getElementById('cobradores-table');
@@ -112,7 +112,7 @@ function doSearch()
         const fila  = document.querySelectorAll('#cobradores-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
 
-        fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
+        fetch(`http://20.226.114.247:8080/api/Facturas/${id}`, {
          method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -142,7 +142,7 @@ function doSearch()
         const estado = "A coordinar";
         const cobradorAsignado = "";
 
-        fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
+        fetch(`http://20.226.114.247:8080/api/Facturas/${id}`, {
          method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -173,7 +173,7 @@ function doSearch()
         const id = fila.querySelectorAll('td')[0].textContent;
         const cobradorAsignado = sessionStorage.getItem('username');
 
-        fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas/${id}`, {
+        fetch(`http://20.226.114.247:8080/api/Facturas/${id}`, {
          method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -195,7 +195,7 @@ function doSearch()
 
     async function getDatosClientes(id) {
         try {
-            const response = await fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes/${id}`);
+            const response = await fetch(`http://20.226.114.247:8080/api/Clientes/${id}`);
             const data = await response.json();
             return data;
     
