@@ -113,10 +113,10 @@ function doSearch()
         const fila  = document.querySelectorAll('#users-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
 
-        const nombre = fila.querySelectorAll('td')[1].textContent;
-        const apellido = fila.querySelectorAll('td')[2].textContent;
-        const email = fila.querySelectorAll('td')[3].textContent; 
-        const telefono = fila.querySelectorAll('td')[4].textContent;
+        const nombre = fila.querySelectorAll('td')[2].textContent;
+        const apellido = fila.querySelectorAll('td')[3].textContent;
+        const email = fila.querySelectorAll('td')[4].textContent; 
+        const telefono = fila.querySelectorAll('td')[5].textContent;
         const funcion = fila.querySelector('select').value;
 
         fetch(`http://20.226.114.247:8080/api/Usuarios/${id}`, {
@@ -148,7 +148,8 @@ function doSearch()
         var posicion = Array.from(preFila.parentNode.children).indexOf(preFila);
         const fila  = document.querySelectorAll('#users-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
-        const email = fila.querySelectorAll('td')[3].textContent;
+        const email = fila.querySelectorAll('td')[4].textContent;
+
 
         fetch(`http://20.226.114.247:8080/api/Auth/Autorize/${id}`, {
          method: 'PUT',
