@@ -1,10 +1,9 @@
 const funcionUsr = sessionStorage.getItem('funcion');
-
 if (funcionUsr !== "Gerencia" || funcionUsr !== "Administrador") {
     window.location.href = 'sinPermisos.html';
 } else {
     cargarUsuarios();
-}
+} 
 
 function limpiarTabla() 
 {
@@ -50,7 +49,7 @@ function doSearch()
     function cargarUsuarios() 
     { 
         limpiarTabla();
-        fetch('http://20.226.114.247:8080/api/Usuarios/')
+        fetch('http://20.226.114.247:8080/api/Usuarios')
           .then(response => response.json())
           .then(data => {
             const tabla = document.getElementById('users-table');
@@ -59,7 +58,7 @@ function doSearch()
                 if (usuario.usuario !== "Administrador") {
                     let celdaEstado;
 
-                    if (usuario.estado === "null" || usuario.estado === null || usuario.estado === "Deshabilitado") {
+                    if (usuario.estado === "null" || usuario.estado === null || usuario.estado === "Deshabilitado" || usuario.estado === "estado 1") {
                         celdaEstado = '<button class="btn btn-secondary btn-sm" onclick="habilitarUsuario(this)">Habilitar</button>';
                     } else {
                         celdaEstado = `${usuario.estado}`;
@@ -114,10 +113,10 @@ function doSearch()
         const fila  = document.querySelectorAll('#users-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
 
-        const nombre = fila.querySelectorAll('td')[1].textContent;
-        const apellido = fila.querySelectorAll('td')[2].textContent;
-        const email = fila.querySelectorAll('td')[3].textContent; 
-        const telefono = fila.querySelectorAll('td')[4].textContent;
+        const nombre = fila.querySelectorAll('td')[2].textContent;
+        const apellido = fila.querySelectorAll('td')[3].textContent;
+        const email = fila.querySelectorAll('td')[4].textContent; 
+        const telefono = fila.querySelectorAll('td')[5].textContent;
         const funcion = fila.querySelector('select').value;
 
         fetch(`http://20.226.114.247:8080/api/Usuarios/${id}`, {
@@ -149,7 +148,8 @@ function doSearch()
         var posicion = Array.from(preFila.parentNode.children).indexOf(preFila);
         const fila  = document.querySelectorAll('#users-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
-        const email = fila.querySelectorAll('td')[3].textContent;
+        const email = fila.querySelectorAll('td')[4].textContent;
+
 
         fetch(`http://20.226.114.247:8080/api/Auth/Autorize/${id}`, {
          method: 'PUT',

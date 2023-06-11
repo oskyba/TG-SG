@@ -5,7 +5,7 @@ if (funcionUsr !== "Gerencia" || funcionUsr !== "Administrador") {
 } 
 
 async function generarReporte(variableReporte, estado) {
-    const facturas = await fetch("https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/facturas")
+    const facturas = await fetch("http://20.226.114.247:8080/api/Facturas")
       .then(response => response.json())
       .catch(error => console.error(error));
   

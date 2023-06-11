@@ -1,9 +1,10 @@
-const tokenLogin = sessionStorage.getItem('authToken');
+toggleZoomScreen();
 
+const tokenLogin = sessionStorage.getItem('authToken');
 
 if (!tokenLogin) {
   window.location.href = 'sinPermisos.html';
-}
+} 
 
 const logoutLink = document.getElementById("logout-link");
 
@@ -38,4 +39,8 @@ function seleccionarOpcion(listaEstado, valorSeleccionado) {
       break;
     }
   }
+}
+
+function toggleZoomScreen() {
+  document.body.style.zoom = "80%";
 }

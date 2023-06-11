@@ -14,7 +14,7 @@ function limpiarTabla() {
 function cargarClientes() 
 { 
         limpiarTabla();
-        fetch('https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes')
+        fetch('http://20.226.114.247:8080/api/Clientes')
           .then(response => response.json())
           .then(data => {
             const tabla = document.getElementById('client-table');
@@ -106,7 +106,7 @@ function showModal()
         const direccion = fila.querySelectorAll('td')[3].textContent;
         const email = fila.querySelectorAll('td')[4].textContent; 
 
-        fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes/${id}`, {
+        fetch(`http://20.226.114.247:8080/api/Clientes/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -136,7 +136,7 @@ function showModal()
         const direccion =  document.getElementById('address-input').textContent;
         const email     = document.getElementById('email-input').textContent;
 
-        fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clientes`, {
+        fetch(`http://20.226.114.247:8080/api/Clientes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -169,7 +169,7 @@ function showModal()
         const fila  = document.querySelectorAll('#client-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
 
-        fetch(`https://644bd91a4bdbc0cc3a9c3baa.mockapi.io/clients/${id}`, {
+        fetch(`http://20.226.114.247:8080/api/Clientes/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
