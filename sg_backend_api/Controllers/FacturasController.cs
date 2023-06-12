@@ -5,6 +5,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using SG_Backend_api.Common;
+using Dapper;
+using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
+using System;
 
 namespace SG_Backend_api.Controllers
 {
@@ -65,8 +69,26 @@ namespace SG_Backend_api.Controllers
         public async Task<ActionResult> Put(int id, [FromBody] DatosBody body)
         {
             string cdProv = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string setext = "";
 
-            int found = await db.Value<int>("SELECT COUNT(*) FROM telpop.Facturas WHERE ID=@id AND CodProvincia=@cdProv;UPDATE telpop.Facturas SET text=@text WHERE ID=@id AND CodProvincia=@cdProv", new { body.Nombre, id, cdProv });
+            Type tipoClase = body.GetType(); // Obtener el tipo de la clase DatosBody
+            PropertyInfo[] propiedades = tipoClase.GetProperties(); // Obtener todas las propiedades de la clase
+
+            //Manejamos los parametros de las sentencias dinamicamente
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", id);
+
+            foreach (PropertyInfo propiedad in propiedades)
+            {
+                string nombrePropiedad = propiedad.Name; // Obtener el nombre de la propiedad
+                object valorPropiedad = propiedad.GetValue(body); // Obtener el valor de la propiedad
+
+                // Armamos la bateria de SETs y parametros...
+                setext = setext + (setext.IsNullOrEmpty() ? " " : ", ") + nombrePropiedad + "=@" + nombrePropiedad;
+                parameters.Add("@" + nombrePropiedad, valorPropiedad.ToString());
+            }
+
+            int found = await db.Value<int>("SELECT COUNT(*) FROM telpop.Facturas WHERE ID=@id;UPDATE telpop.Facturas SET" + setext + " WHERE ID=@id ", parameters);
 
             if (found > 0)
                 return Ok($"Factura: {id} modificada exitosamente");

@@ -7,8 +7,8 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <FileVersion>1.01.0511.1955</FileVersion>
-    <AssemblyVersion>1.01.0511.1955</AssemblyVersion>
+    <FileVersion>1.05.0612.51219</FileVersion>
+    <AssemblyVersion>1.05.0612.51219</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
