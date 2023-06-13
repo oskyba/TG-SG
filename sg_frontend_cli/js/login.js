@@ -1,5 +1,5 @@
 const loginForm = document.getElementById('login-form');
- const apiUrl = 'http://20.226.114.247:8080/api/Auth/Login';
+const apiUrl = 'http://20.226.114.247:8080/api/Auth/Login';
 
 loginForm.addEventListener('submit', async event => {
   event.preventDefault();
