@@ -1,5 +1,5 @@
 const funcionUsr = sessionStorage.getItem('funcion');
-if (funcionUsr !== "Gerencia" || funcionUsr !== "Administrador") {
+if (funcionUsr !== "Gerencia" && funcionUsr !== "Administrador") {
     window.location.href = 'sinPermisos.html';
 } else {
     cargarUsuarios();
@@ -58,7 +58,7 @@ function doSearch()
                 if (usuario.usuario !== "Administrador") {
                     let celdaEstado;
 
-                    if (usuario.estado === "null" || usuario.estado === null || usuario.estado === "Deshabilitado" || usuario.estado === "estado 1") {
+                    if (usuario.estado === "null" || usuario.estado === null || usuario.estado === "Deshabilitado" || usuario.nombre === "Prueba") {
                         celdaEstado = '<button class="btn btn-secondary btn-sm" onclick="habilitarUsuario(this)">Habilitar</button>';
                     } else {
                         celdaEstado = `${usuario.estado}`;
@@ -66,14 +66,14 @@ function doSearch()
                     const row = document.createElement('tr');
 
                     row.innerHTML = `
-                    <td><div>${usuario.id_usuario}</div></td>
+                    <td><div>${usuario.id}</div></td>
                     <td><div>${usuario.usuario}</div></td>
                     <td><div contenteditable="true" maxlength="30">${usuario.nombre}</div></td>
                     <td><div contenteditable="true" maxlength="30">${usuario.apellido}</div></td>
                     <td><div contenteditable="true" maxlength="50">${usuario.email}</div></td>
                     <td><div contenteditable="true" maxlength="15">${usuario.telefono}</div></td>
                     <td><div>
-                    <select id="funcion-${usuario.id_usuario}">${usuario.funcion}
+                    <select id="funcion-${usuario.id}">${usuario.funcion}
                         <option value="Sin asignar">Sin asignar</value>
                         <option value="Administración">Administración</value>
                         <option value="Cobranza">Cobranza</value>
@@ -88,7 +88,7 @@ function doSearch()
                     `; 
                     
                     tbody.appendChild(row);        
-                    seleccionarOpcion(document.getElementById(`funcion-${usuario.id_usuario}`), usuario.funcion);     
+                    seleccionarOpcion(document.getElementById(`funcion-${usuario.id}`), usuario.funcion);     
 
                     $("div[contenteditable='true'][maxlength]").on('keyup paste', function (event) {
                         var cntMaxLength = parseInt($(this).attr('maxlength'));
@@ -150,7 +150,6 @@ function doSearch()
         const fila  = document.querySelectorAll('#users-table tbody tr')[posicion];
         const id = fila.querySelectorAll('td')[0].textContent;
         const email = fila.querySelectorAll('td')[4].textContent;
-
 
         fetch(`http://20.226.114.247:8080/api/Auth/Autorize/${id}`, {
          method: 'PUT',

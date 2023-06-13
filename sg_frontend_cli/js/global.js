@@ -1,5 +1,6 @@
 toggleZoomScreen();
 
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const tokenLogin = sessionStorage.getItem('authToken');
 
 if (!tokenLogin) {
