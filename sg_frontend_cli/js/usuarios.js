@@ -74,6 +74,7 @@ function doSearch()
                     <td><div contenteditable="true" maxlength="15">${usuario.telefono}</div></td>
                     <td><div>
                     <select id="funcion-${usuario.id_usuario}">${usuario.funcion}
+                        <option value="Sin asignar">Sin asignar</value>
                         <option value="Administración">Administración</value>
                         <option value="Cobranza">Cobranza</value>
                         <option value="Gerencia">Gerencia</value>
