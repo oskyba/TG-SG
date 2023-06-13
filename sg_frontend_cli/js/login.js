@@ -32,7 +32,7 @@ loginForm.addEventListener('submit', async event => {
         if (formData.get('username') === 'admin') {
           const funcion = "Administrador";
           const username = formData.get('username');
-          const authToken = "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQ";
+          const authToken = "7WK5T79u5mIzjIXXi2oI9Fglmgivv7RAJ7izyj9tUyQT";
           sessionStorage.setItem('authToken', authToken);
           sessionStorage.setItem('username', username);
           sessionStorage.setItem('funcion', funcion);
