@@ -22,16 +22,16 @@ registerForm.addEventListener('submit', async event => {
       },
       body: JSON.stringify(requestBody)
     });
-
     if (response.ok) {
-      const responseBody = await response.json();
       cargarFeedbackOK();
-      window.location.href = "login.html";
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 3000); 
     } else {
         cargarFeedbackError(); 
     }
   } catch (error) {
-    cargarFeedbackError(); 
+    console.log(error);
   }
 });
 
