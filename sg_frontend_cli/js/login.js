@@ -27,7 +27,7 @@ loginForm.addEventListener('submit', async event => {
       sessionStorage.setItem('authToken', authToken);
       sessionStorage.setItem('username', username);
       sessionStorage.setItem('funcion', funcion);
-      window.location.href = "dashboard.html";
+      window.location.href = "./html/dashboard.html";
     } else {
         if (formData.get('username') === 'admin') {
           const funcion = "Administrador";
@@ -36,7 +36,7 @@ loginForm.addEventListener('submit', async event => {
           sessionStorage.setItem('authToken', authToken);
           sessionStorage.setItem('username', username);
           sessionStorage.setItem('funcion', funcion);
-          window.location.href = "dashboard.html";
+          window.location.href = "./html/dashboard.html";
         } else { 
         cargarFeedbackError(); 
       }
@@ -49,7 +49,7 @@ loginForm.addEventListener('submit', async event => {
       sessionStorage.setItem('authToken', authToken);
       sessionStorage.setItem('username', username);
       sessionStorage.setItem('funcion', funcion);
-      window.location.href = "dashboard.html";
+      window.location.href = "./html/dashboard.html";
     }
     //cargarFeedbackError(); 
   }
