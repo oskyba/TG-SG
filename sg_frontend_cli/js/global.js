@@ -1,5 +1,6 @@
 toggleZoomScreen();
 
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const tokenLogin = sessionStorage.getItem('authToken');
 
 if (!tokenLogin) {
@@ -11,7 +12,7 @@ const logoutLink = document.getElementById("logout-link");
 logoutLink.addEventListener("click", (event) => {
   event.preventDefault(); 
   sessionStorage.clear(); 
-  window.location.href = "login.html";
+  window.location.href = "../login.html";
 });
 
 function cargarFeedbackOK() {
