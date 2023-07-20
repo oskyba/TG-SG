@@ -25,7 +25,7 @@ registerForm.addEventListener('submit', async event => {
     if (response.ok) {
       cargarFeedbackOK();
       setTimeout(() => {
-        window.location.href = "login.html";
+        window.location.href = "../login.html";
       }, 3000); 
     } else {
         cargarFeedbackError(); 
