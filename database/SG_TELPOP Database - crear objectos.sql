@@ -20,7 +20,7 @@ CREATE TABLE telpop.usuarios (
  email VARCHAR(50) NOT NULL,
  telefono VARCHAR(15) NOT NULL,
  funcion VARCHAR(14) NOT NULL,
- estado VARCHAR(145 NOT NULL
+ estado VARCHAR(14) NOT NULL
 );
 
 CREATE TABLE telpop.clientes (

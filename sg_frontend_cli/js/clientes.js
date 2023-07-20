@@ -1,6 +1,6 @@
 const funcionUsr = sessionStorage.getItem('funcion');
 
-if (funcionUsr !== "Administración" || funcionUsr !== "Administrador") {
+if (funcionUsr !== "Administración" && funcionUsr !== "Administrador") {
     window.location.href = 'sinPermisos.html';
 } else {
     cargarClientes();
@@ -45,7 +45,7 @@ function cargarClientes()
                   });
                 }
                 });
-                
+
             });
           })
           .catch(error => {
@@ -130,7 +130,6 @@ function showModal()
 
     function agregarCliente() 
     {
-        const id       = document.getElementById("id-client-input").textContent;
         const nombre   = document.getElementById('name-input').textContent;
         const telefono =  document.getElementById('phone-input').textContent;
         const direccion =  document.getElementById('address-input').textContent;
@@ -143,7 +142,6 @@ function showModal()
             },
             body: JSON.stringify(
                 {
-                    id: id,
                     nombre: nombre,
                     telefono: telefono, 
                     direccion: direccion,
