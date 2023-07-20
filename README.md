@@ -15,6 +15,7 @@ Documentacion APIs con Swagger y Docker-ready.
 
 URL acceso : 
 <p>
+Acceso al Portal Web <br/>    
 http://sg-tecnoglobal.brazilsouth.cloudapp.azure.com/ <br/><br/>
 Acceso al API Backend <br/> 
 http://20.226.114.247:8080/swagger/index.html<br/>
