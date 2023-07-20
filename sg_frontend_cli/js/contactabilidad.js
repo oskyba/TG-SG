@@ -90,7 +90,7 @@ function cargarContactabilidad()
                 dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié;', 'Juv', 'Vie', 'Sáb'],
                 dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
                 weekHeader: 'Sm',
-                dateFormat: 'yy/mm/dd',
+                dateFormat: 'dd/mm/yy',
                 firstDay: 1,
                 forceParse: false,
                 isRTL: false,
@@ -156,6 +156,9 @@ function actualizarEstadoFactura(boton) {
     const estado = "Coordinado";
     const contactadoPor = sessionStorage.getItem('username');
 
+    let [ano, mes, dia] = fechaCobro.split('-');
+    const fechaCobroDDMMAAAA = `${dia}/${mes}/${ano}`;
+
     fetch(`http://20.226.114.247:8080/api/Facturas/${id}`, {
         method: 'PUT',
         headers: {
@@ -163,7 +166,7 @@ function actualizarEstadoFactura(boton) {
         },
         body: JSON.stringify({
           estado: estado,
-          fechaCobro: fechaCobro,
+          fechaCobro: fechaCobroDDMMAAAA,
           contactadoPor: contactadoPor
         })
     })
@@ -187,6 +190,7 @@ async function getDatosClientes(id) {
         console.error(error);
     }
 }
+
 async function setDatosClientes(id) {
     const clienteTelefonoGet = await getDatosClientes(id);
     clienteTelefono = clienteTelefonoGet.telefono;

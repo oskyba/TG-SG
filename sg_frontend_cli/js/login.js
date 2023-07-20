@@ -51,7 +51,6 @@ loginForm.addEventListener('submit', async event => {
       sessionStorage.setItem('funcion', funcion);
       window.location.href = "./html/dashboard.html";
     }
-    //cargarFeedbackError(); 
   }
 });
 
