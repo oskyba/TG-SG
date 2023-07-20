@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>Facturas</title>
 	<!-- Incluir los archivos CSS y JavaScript necesarios -->
 	<link rel="stylesheet" type="text/css" href="../css/styles.css">
@@ -53,22 +54,20 @@
     <div id="snackbarError">Hubo un problema al actualizar el registro</div>
     <div id="snackbarSystem">Hubo un problema al recuperar los registros</div>
 
-    
-	<!-- Modal para agregar o editar una factura -->
 	<div id="modalFactura" class="modal">
 		<div class="modal-content">
 			<span class="close" onclick="closeModal()">&times;</span>
-			<!-- Aquí se incluyen los campos de la factura -->
-			<!-- El formulario se puede reutilizar para agregar y editar -->
 			<form id="formFactura">
-				<label for="idCliente">ID Cliente:</label>
-					<input type="text" id="idCliente" name="idCliente" required>
-				<label for="fechaEmision">Fecha:</label>
+				<label for="idCliente">ID Cliente</label>
+					<select id="idCliente" name="idCliente" required>
+						<option value="" selected></option>
+					</select>
+				<label for="fechaEmision">Fecha de emisión</label>
 					<input type="date" id="fechaEmision" name="fechaEmision" required>
-				<label for="numeroFactura">Número Factura:</label>
-					<input type="text" id="numeroFactura" name="numeroFactura" required>
-				<label for="importe">Importe:</label>
-					<input type="text" id="importe" name="importe" required>
+				<label for="numeroFactura">Número de factura:/label>
+					<input type="text" id="numeroFactura" name="numeroFactura" required maxlength="15">
+				<label for="importe">Importe</label>
+					<input type="text" id="importe" name="importe" required maxlength="19">
 				<label for="fechaVenciminento">Fecha de vencimiento</label>
 					<input type="date" id="fechaVencimiento" name="fechaVencimiento" required>
 				<button id="cancel-client-button" onclick="closeModal()">Cancelar</button>

@@ -58,7 +58,7 @@ function doSearch()
                 if (usuario.usuario !== "Administrador") {
                     let celdaEstado;
 
-                    if (usuario.estado === "null" || usuario.estado === null || usuario.estado === "Deshabilitado" || usuario.nombre === "Prueba") {
+                    if (usuario.estado === "null" || usuario.estado === null || usuario.estado === "Deshabilitado") {
                         celdaEstado = '<button class="btn btn-secondary btn-sm" onclick="habilitarUsuario(this)">Habilitar</button>';
                     } else {
                         celdaEstado = `${usuario.estado}`;

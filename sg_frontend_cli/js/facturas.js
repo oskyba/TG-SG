@@ -30,7 +30,7 @@ function cargarFacturas()
                         <div class="date" contenteditable="true" maxlength="10">${facturas.fechaEmision}</div>
                     </td>
                     <td><div contenteditable="true" maxlength="15">${facturas.numeroFactura}</div></td>
-                    <td><div contenteditable="true" maxlength="30">${facturas.importe}</div></td>
+                    <td><div contenteditable="true" maxlength="18">${facturas.importe}</div></td>
                     </div></td>
                     <td>
                         <input name="date" class="datepicker-input" type="hidden" />
@@ -69,7 +69,7 @@ function cargarFacturas()
                 dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié;', 'Juv', 'Vie', 'Sáb'],
                 dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
                 weekHeader: 'Sm',
-                dateFormat: 'yy/mm/dd',
+                dateFormat: 'dd/mm/yy',
                 firstDay: 1,    
                 forceParse: false,
                 isRTL: false,
@@ -94,8 +94,8 @@ function cargarFacturas()
                     if (dateText === '') {
                       $date.text(previousDate); 
                       return;
-                    }
-                  
+                    }   
+                    
                     if (dateText !== previousDate) {
                       $date.text(dateText); 
                     }
@@ -124,7 +124,7 @@ function cargarFacturas()
 
 function agregarFactura() 
 {
-    const idCliente        = document.getElementById('idCliente').textContent;
+    const idCliente        = document.getElementById('idCliente').value;
     const fechaEmision     = document.getElementById('fechaEmision').value;
     const numeroFactura    = document.getElementById('numeroFactura').textContent;
     const importe          = document.getElementById('importe').textContent;
@@ -135,6 +135,12 @@ function agregarFactura()
     const cobradorAsignado = "";
     const comentarios      = "";
 
+    let [ano, mes, dia] = fechaEmision.split('-');
+    const fechaEmisionDDMMAAAA = `${dia}/${mes}/${ano}`;
+
+    [ano, mes, dia] = fechaVencimiento.split('-');
+    const fechaVencimientoDDMMAAAA = `${dia}/${mes}/${ano}`;
+
     fetch(`http://20.226.114.247:8080/api/Facturas`, {
         method: 'POST',
         headers: {
@@ -143,11 +149,11 @@ function agregarFactura()
         body: JSON.stringify(
             {
                 idCliente: idCliente,
-                fechaEmision: fechaEmision,
+                fechaEmision: fechaEmisionDDMMAAAA,
                 numeroFactura: numeroFactura,
                 importe: importe,
                 estado: estado,
-                fechaVencimiento: fechaVencimiento,
+                fechaVencimiento: fechaVencimientoDDMMAAAA,
                 fechaCobro: fechaCobro,
                 contactadoPor: contactadoPor,
                 cobradorAsignado: cobradorAsignado,
@@ -155,9 +161,9 @@ function agregarFactura()
             })
     })
     .then(response => {
+        if (!response.ok) throw Error(response.status);
         closeModal();
         cargarFacturas();
-        if (!response.ok) throw Error(response.status);
         cargarFeedbackOK(); 
     })
     .catch(error => {
@@ -178,7 +184,18 @@ function modificarFactura(boton)
     const importe = fila.querySelectorAll('td')[4].textContent; 
     const estado = fila.querySelector('select').value;
     const fechaVencimiento = fila.querySelectorAll('td .date')[1].textContent; 
-    const fechaCobro = fila.querySelectorAll('td .date')[2].textContent; 
+    let fechaCobro = fila.querySelectorAll('td .date')[2].textContent; 
+
+    let [ano, mes, dia] = fechaEmision.split('-');
+    const fechaEmisionDDMMAAAA = `${dia}/${mes}/${ano}`;
+
+    [ano, mes, dia] = fechaVencimiento.split('-');
+    const fechaVencimientoDDMMAAAA = `${dia}/${mes}/${ano}`;
+
+    if (fechaCobro !== "") {
+        [ano, mes, dia] = fechaCobro.split('-');
+        fechaCobro = `${dia}/${mes}/${ano}`;
+    }
 
     fetch(`http://20.226.114.247:8080/api/Facturas/${id}`, {
         method: 'PUT',
@@ -187,17 +204,17 @@ function modificarFactura(boton)
         },
         body: JSON.stringify({
           idCliente: idCliente,
-          fechaEmision: fechaEmision,
+          fechaEmision: fechaEmisionDDMMAAAA,
           numeroFactura: numeroFactura,
           importe: importe,
           estado: estado,
-          fechaVencimiento: fechaVencimiento,
+          fechaVencimiento: fechaVencimientoDDMMAAAA,
           fechaCobro: fechaCobro
         })
     })
     .then(response => {
-        cargarFacturas();  
         if (!response.ok) throw Error(response.status);
+        cargarFacturas();  
         cargarFeedbackOK(); 
     })
     .catch(error => {
@@ -220,8 +237,8 @@ function eliminarFactura(boton)
         },
       })
     .then(response => {
-        cargarFacturas(); 
         if (!response.ok) throw Error(response.status);
+        cargarFacturas(); 
         cargarFeedbackOK();  
       })
     .catch(error => {
@@ -264,8 +281,31 @@ function doSearch()
             }
         }
 
+function cargarClientesModal() {
+    const selectCliente = document.getElementById('idCliente');
+
+    while (selectCliente.options.length > 1) {
+        selectCliente.remove(1);
+      }
+            
+    fetch('http://20.226.114.247:8080/api/Clientes')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(cliente => {
+            const option = document.createElement('option');
+            option.value = cliente.id; 
+            option.textContent = cliente.id + " - " + cliente.nombre;
+            selectCliente.appendChild(option);
+        });
+    })
+    .catch(error => {
+        cargarFeedbackError(); 
+    });
+}
+
 function showModal() 
 {
+    cargarClientesModal()
     var modal = document.getElementById("modalFactura");
     modal.style.display = "block";
 }
